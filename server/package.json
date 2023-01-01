@@ -1,0 +1,39 @@
+{
+  "name": "wordverse-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./server/index.js",
+  "scripts": {
+    "dev": "nodemon",
+    "start": "node ."
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "client/*"
+    ]
+  },
+  "keywords": [],
+  "author": "Wordverse",
+  "license": "AGPL-3.0",
+  "dependencies": {
+    "axios": "^1.2.1",
+    "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "http-status": "^1.5.3",
+    "joi": "^17.7.0",
+    "jsonwebtoken": "^9.0.0",
+    "moment": "^2.29.4",
+    "mongoose": "^6.8.1",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.1",
+    "resolve": "^1.22.1",
+    "socket.io": "^4.5.4",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}

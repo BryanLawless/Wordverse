@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css');
+
+:root {
+	--primary-color: #3B59F9;
+	--accent-color: #fefb75;
+	--background-color-primary: #8b6aff;
+	--text-primary-color: #fff;
+
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	list-style: none;
+	list-style-type: none;
+	text-decoration: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+}
+
+body {
+	color: var(--text-primary-color);
+	background: var(--background-color-primary);
+	font-family: 'Russo One', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	transition: all ease-in-out .3s;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+	padding: 0;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.heading-effect {
+	font-size: 5rem;
+	color: #fefb75;
+	text-transform: uppercase;
+	text-shadow: 0 1px 0 #e48f07, 0 2px 0 #e48f07,
+		0 3px 0 #e48f07, 0 4px 0 #e48f07,
+		0 5px 0 #e48f07, 0 6px 0 #e48f07,
+		0 7px 0 #e48f07, 0 8px 0 #e48f07,
+		0 9px 0 #e48f07, 0 10px 0 #e48f07,
+		0 11px 0 #e48f07, 0 12px 0 #e48f07,
+		0 20px 30px rgba(0, 0, 0, 0.5);
+}
+
+.heading-effect-invert {
+	font-size: 5rem;
+	color: #fff;
+	text-transform: uppercase;
+	text-shadow: 0 1px 0 #a682fe, 0 2px 0 #a682fe,
+		0 3px 0 #a682fe, 0 4px 0 #a682fe,
+		0 5px 0 #a682fe, 0 6px 0 #a682fe,
+		0 7px 0 #a682fe, 0 8px 0 #a682fe,
+		0 9px 0 #a682fe, 0 10px 0 #a682fe,
+		0 11px 0 #a682fe, 0 12px 0 #a682fe,
+		0 20px 30px rgba(0, 0, 0, 0.5);
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	gap: 3.5rem;
+	position: relative;
+}
+
+a {
+	color: var(--primary-color);
+	text-decoration: none;
+	cursor: pointer;
+	background: transparent;
+}
+
+.text-highlight {
+	color: var(--primary-color);
+}
+
+.heading {
+	font-size: 3rem;
+}
+
+.large-heading {
+	font-size: 6rem;
+	font-weight: 700;
+}
+
+.hidden {
+	display: none;
+}
+
+.btn-primary {
+	color: #592e2e;
+	background-color: #fefb75;
+	box-shadow: 0 1px 0 #e48f07, 0 2px 0 #e48f07,
+		0 3px 0 #e48f07, 0 4px 0 #e48f07,
+		0 5px 0 #e48f07, 0 6px 0 #e48f07,
+		0 7px 0 #e48f07, 0 8px 0 #e48f07,
+		0 9px 0 #e48f07, 0 10px 0 #e48f07,
+		0 11px 0 #e48f07, 0 12px 0 #e48f07,
+		0 20px 30px rgba(0, 0, 0, 0.5);
+}
+
+.btn-small {
+	padding: 12px 20px;
+}
+
+.btn-center {
+	display: flex;
+	justify-content: center;
+}
+
+.label-block {
+	display: inline-block;
+	background-color: red;
+	width: 120px;
+	height: 120px;
+	padding: 5px 10px;
+}
+
+.radio:checked+.label-block {
+	background-color: blue;
+}
+
+.input-field {
+	font-family: inherit;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: inherit;
+	width: 100%;
+	height: auto;
+	padding: 1rem 1.50rem;
+	outline: none;
+	border-radius: 2rem;
+	color: #fff;
+	background: #924ce1;
+	text-transform: unset;
+	text-rendering: optimizeLegibility;
+	border: 3px solid #924ce1;
+	transition: 0.1s;
+}
+
+.input-field:focus {
+	border: 3px solid #fefb75;
+}
+
+.input-control {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 1.25rem;
+}
+
+.box-gradient {
+	box-shadow: 0 0 50px 15px #8052e8;
+	background: linear-gradient(180deg, #b97bfd, #906afb);
+}
