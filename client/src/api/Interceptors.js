@@ -11,9 +11,7 @@ const setup = (authStore) => {
 		}
 	);
 
-	instance.interceptors.response.use((res) => {
-		return res
-	}, async (err) => {
+	instance.interceptors.response.use((res) => { return res }, async (err) => {
 		const originalRequest = err.config;
 
 		if (originalRequest.url !== '/auth/login' || originalRequest.url !== '/auth/register' && err.response) {

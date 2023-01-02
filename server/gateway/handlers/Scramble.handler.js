@@ -49,7 +49,7 @@ class ScrambleHandler {
 
 		let shuffedLetters = Utility.shuffle(randomWword);
 		let wordDefinition = await Core.getDefinition(randomWword);
-		if (!wordDefinition) wordDefinition = 'No definition found.';
+		if (!wordDefinition) wordDefinition = 'Unable to get definition.';
 
 		PlayerStore.setAnswer(socket.id, randomWword);
 

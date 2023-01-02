@@ -1,6 +1,9 @@
 <template>
 	<div class="container">
-		<h1 class="heading-effect">Word<span class="heading-effect-invert">verse</span></h1>
+		<h1 class="heading-effect">
+			<span class="main-text">Word</span>
+			<span class="heading-effect-invert">verse</span>
+		</h1>
 		<div class="box box-gradient">
 			<div class="inner-box">
 				<div class="hexagon">
@@ -44,23 +47,10 @@ import { redirect } from '@/helpers/Utility';
 .hexagon .main-letter {
 	font-size: 10rem;
 	font-weight: 900;
-	background-image: linear-gradient(180deg, #551212, #841449);
-	background-size: 100%;
-	background-repeat: repeat;
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	-moz-background-clip: text;
-	-moz-text-fill-color: transparent;
+	color: #841449;
 }
 
-button {
-	background: #fefb75;
-	padding: 1.5rem 5rem;
-	border-radius: 5rem;
-	text-transform: uppercase;
-	font-size: 1.5rem;
-	border: 4px solid #b95e95;
-	cursor: pointer;
-	color: #5d121c;
+.main-text {
+	margin-right: 7px;
 }
 </style>

@@ -1,7 +1,8 @@
 <template>
 	<div class="toast" :style="toastColors">
 		<div class="toast-content">
-			<i class="fa-solid fa-check"></i>
+			<i v-if="props.toast.type == 'success'" class="fa-solid fa-check"></i>
+			<i v-else-if="props.toast.type == 'error'" class="fa-solid fa-x"></i>
 			<div class="message">
 				<span class="text text-1">{{ props.toast.title }}</span>
 				<span v-if="props.toast.message.length" class="text text-2">{{ props.toast.message }}</span>

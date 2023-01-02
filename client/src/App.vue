@@ -1,6 +1,7 @@
 <template>
 	<div class="texture">
-		<router-view v-slot="{ Component, route }">
+		<CheckingOnline v-if="!state.serverAvailable" @online="state.serverAvailable = true" />
+		<router-view v-if="state.serverAvailable" v-slot="{ Component, route }">
 			<transition name="page-slide" mode="out-in">
 				<div :key="route.name">
 					<ToastManager />
@@ -12,12 +13,18 @@
 </template>
 
 <script setup>
-import ToastManager from './components/ToastManager.vue';
+import { reactive } from 'vue';
+import ToastManager from '@/components/ToastManager.vue';
+import CheckingOnline from '@/components/home/CheckingOnline.vue';
 
-import ws from './gateway/Websocket';
+import ws from '@/gateway/Websocket';
 import { useToastStore } from '@/stores/Toast';
 
 const toastStore = useToastStore();
+
+const state = reactive({
+	serverAvailable: false
+});
 
 ws.on('ERROR_OCCURED', (error) => {
 	toastStore.addToast('error', error)

@@ -2,7 +2,7 @@
 	<button class="btn">
 		<span class="edge"></span>
 		<span class="front" :class="btnSize"><i v-if="props.icon" :class="props.icon"></i> {{ props.text
-		}}</span>
+			}}</span>
 	</button>
 </template>
 
@@ -96,6 +96,7 @@ switch (props.size) {
 }
 
 .btn-large {
+	font-size: 1.5rem;
 	padding: 1.5rem 5rem;
 }
 </style>

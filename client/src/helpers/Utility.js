@@ -47,7 +47,9 @@ export function getTimeRemaining(endtime) {
 }
 
 export async function serverOnline() {
-	let onlinePromise = await instance.get('health').then((response) => {
+	let onlinePromise = await instance.get('health', {
+		timeout: 30000
+	}).then(() => {
 		return true;
 	}).catch(() => {
 		return false;
