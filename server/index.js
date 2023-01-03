@@ -7,6 +7,6 @@ const socketServer = require('./gateway/Main');
 const server = http.createServer(app);
 socketServer.registerSocketServer(server);
 
-server.listen(5000, () => {
-	console.log(`💾 - Words Hurt server started.`);
+server.listen(process.env.PORT || 5000, '0.0.0.0', () => {
+	console.log('💾 - Words Hurt server started.');
 });
