@@ -68,6 +68,16 @@ onMounted(async () => fetchGames());
 </script>
 
 <style lang='css' scoped>
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	gap: 3.5rem;
+	position: relative;
+}
+
 .join-container {
 	display: flex;
 	flex-direction: column;

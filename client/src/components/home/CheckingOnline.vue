@@ -11,11 +11,12 @@
 <script setup>
 import { onMounted, reactive } from 'vue';
 import SimpleLoader from '@/components/SimpleLoader.vue';
+
 import { serverOnline } from '@/helpers/Utility';
 
 const state = reactive({
 	title: 'Hang On!',
-	message: 'We are checking if our game server is online, it may take up to 30 seconds for it to wake up.',
+	message: 'We are checking if our game server is online. This may take up to 30 seconds.',
 	currentlyChecking: true,
 });
 
@@ -26,7 +27,7 @@ onMounted(async () => {
 
 	if (!serverReachable) {
 		state.title = 'Server Offline';
-		state.message = 'Our game server is currently offline, please try again later.';
+		state.message = 'Our game server is currently offline. Please try again later.';
 	} else {
 		emit('online');
 	}
@@ -34,6 +35,16 @@ onMounted(async () => {
 </script>
 
 <style lang="css" scoped>
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	gap: 3.5rem;
+	position: relative;
+}
+
 .online-container {
 	display: flex;
 	flex-direction: column;

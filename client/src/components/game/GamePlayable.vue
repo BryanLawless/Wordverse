@@ -1,13 +1,16 @@
 <template>
+	<Freeze v-if="state.effect == 'freeze'" />
 	<GameHeader />
-	<div class="container">
+	<GameStore v-if="state.storeOpen" @backToGame="state.storeOpen = false" />
+	<div v-if="!state.storeOpen" class="game-playable-container">
 		<div class="game-container box-gradient">
 			<h2 class="letters-title">Letters: </h2>
 			<h1 class="scrambled-letters">{{ state.letters }}</h1>
 			<p class="definition">{{ state.definition }}</p>
 			<input type="text" class="input-field" placeholder="Answer" v-model="state.answer">
 			<div class="game-controls">
-				<Button @click="checkWord" text="Check Word" icon="fa-solid fa-check" size="small" />
+				<Button @click="state.storeOpen = true" text="Store" icon="fa-solid fa-store" small="small" />
+				<Button @click="checkWord" text="Check Word" icon="fa-solid fa-check" small="small" />
 			</div>
 		</div>
 	</div>
@@ -15,10 +18,15 @@
 
 <script setup>
 import { reactive } from 'vue';
+import GameStore from './GameStore.vue';
+import Freeze from './effects/Freeze.vue';
 import Button from '@/components/Button.vue';
+import { useToast } from 'vue-toastification';
 
 import ws from '@/gateway/Websocket';
 import GameHeader from './GameHeader.vue';
+
+const toast = useToast();
 
 const emit = defineEmits(['gameOver']);
 
@@ -26,6 +34,8 @@ const state = reactive({
 	letters: '',
 	answer: '',
 	definition: '',
+	effect: '',
+	storeOpen: false
 });
 
 function checkWord() {
@@ -37,6 +47,29 @@ function checkWord() {
 }
 
 ws.on('GAME_OVER', () => emit('gameOver'));
+ws.on('CORRECT_GUESS', () => toast.success('Correct Guess!'));
+ws.on('INCORRECT_GUESS', () => toast.error('Incorrect Guess!'));
+
+ws.on('POWERUP_USED', (powerup) => {
+	toast(`You used the ${powerup} powerup!`);
+})
+
+ws.on('POWERUP_RECIEVED', (powerup) => {
+	switch (powerup.name) {
+		case 'freeze':
+			toast(`You have been frozen for ${powerup.duration / 1000} seconds!`, { timeout: 10000, pauseOnFocusLoss: false });
+			state.effect = 'freeze';
+			break;
+	}
+});
+
+ws.on('POWERUP_EFFECT_CLEARED', (effect) => {
+	switch (effect) {
+		case 'freeze':
+			state.effect = '';
+			break;
+	}
+});
 
 ws.on('NEW_LETTERS', (data) => {
 	state.letters = data.letters;
@@ -45,6 +78,16 @@ ws.on('NEW_LETTERS', (data) => {
 </script>
 
 <style lang="css" scoped>
+.game-playable-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	gap: 3.5rem;
+	position: relative;
+}
+
 .game-container {
 	display: flex;
 	flex-direction: column;

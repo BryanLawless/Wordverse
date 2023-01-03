@@ -11,6 +11,7 @@ class PlayerStore {
 			answer: '',
 			score: 0,
 			coins: 0,
+			effects: [],
 		};
 
 		this.players.push(player)
@@ -37,7 +38,10 @@ class PlayerStore {
 
 	setAnswer(playerSocketId, answer) {
 		let playerIndex = this.getPlayerIndex(playerSocketId);
-		this.players[playerIndex].answer = answer;
+
+		if (this.players[playerIndex]) {
+			this.players[playerIndex].answer = answer;
+		}
 	}
 
 	addCoins(playerSocketId, coins) {
@@ -52,16 +56,42 @@ class PlayerStore {
 		return this.players[playerIndex].score += points
 	}
 
+	removeScore(playerSocketId, points) {
+		let playerIndex = this.getPlayerIndex(playerSocketId);
+
+		return this.players[playerIndex].score -= points;
+	}
+
+	removeCoins(playerSocketId, coins) {
+		let playerIndex = this.getPlayerIndex(playerSocketId);
+
+		return this.players[playerIndex].coins -= coins;
+	}
+
 	nicknameExistsInGame(nickname, gamePin) {
 		let playersInGame = this.getPlayers(gamePin);
 
 		return playersInGame.some(player => player.nickname === nickname);
 	}
 
+	addEffect(socketId, effect) {
+		let playerIndex = this.getPlayerIndex(socketId);
+
+		this.players[playerIndex].effects.push(effect);
+	}
+
+	removeEffect(socketId, effectName) {
+		let playerIndex = this.getPlayerIndex(socketId);
+
+		if (this.players[playerIndex]) {
+			this.players[playerIndex].effects = this.players[playerIndex].effects.filter((effect) => effect.name != effectName);
+		}
+	}
+
 	removePlayer(playerSocketId) {
 		var player = this.getPlayer(playerSocketId);
 
-		return (player ? this.players = this.players.filter((player) => player.player_socket_id !== playerSocketId) : false);
+		return (player ? this.players = this.players.filter((player) => player.player_socket_id != playerSocketId) : false);
 	}
 
 	removePlayers(gameId) {

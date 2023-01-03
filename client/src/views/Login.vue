@@ -16,8 +16,8 @@
 <script setup>
 import { reactive } from 'vue';
 
-import { AuthService } from '@/services/Auth';
 import { redirect } from '@/helpers/Utility';
+import { AuthService } from '@/services/Auth';
 import { useToastStore } from '@/stores/Toast';
 
 const toastStore = useToastStore();
@@ -45,6 +45,16 @@ async function attemptLogin() {
 </script>
 
 <style lang="css" scoped>
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	gap: 3.5rem;
+	position: relative;
+}
+
 .main-container {
 	display: flex;
 	flex-direction: column;

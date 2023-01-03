@@ -24,6 +24,16 @@ ws.on('TUTORIAL_FINISHED', () => emit('tutorialFinished'));
 </script>
 
 <style lang="css" scoped>
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	gap: 3.5rem;
+	position: relative;
+}
+
 .tutorial-slide-enter-active,
 .tutorial-slide-leave-active {
 	transition: 400ms ease all;

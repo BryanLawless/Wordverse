@@ -78,11 +78,6 @@ ws.on('GAME_TIMER_SET', (time) => state.timestamp = time);
 	background-color: rgba(210, 213, 255, 0.3);
 }
 
-.value-graphic {
-	max-height: 1.5rem;
-	max-width: 1.5rem;
-}
-
 .game-value-coins,
 .game-value-score {
 	display: flex;

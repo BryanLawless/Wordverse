@@ -30,7 +30,3 @@ onMounted(() => {
 	timeInterval = setInterval(updateClock, 1000);
 });
 </script>
-
-<style lang="css" scoped>
-
-</style>

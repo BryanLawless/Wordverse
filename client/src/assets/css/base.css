@@ -72,16 +72,6 @@ h6,
 		0 20px 30px rgba(0, 0, 0, 0.5);
 }
 
-.container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	height: 100vh;
-	gap: 3.5rem;
-	position: relative;
-}
-
 a {
 	color: var(--primary-color);
 	text-decoration: none;
@@ -171,4 +161,9 @@ a {
 .box-gradient {
 	box-shadow: 0 0 50px 15px #8052e8;
 	background: linear-gradient(180deg, #b97bfd, #906afb);
+}
+
+.value-graphic {
+	max-height: 1.5rem;
+	max-width: 1.5rem;
 }

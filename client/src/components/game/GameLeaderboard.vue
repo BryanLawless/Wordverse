@@ -4,7 +4,7 @@
 			<div class="header">
 				<h3 class="title">Top Players</h3>
 			</div>
-			<div v-for="(player, index) in state.leaderboard" :key="index" class="rest">
+			<div v-for="(player, index) in state.leaderboard.slice(0, 5)" :key="index" class="rest">
 				<div class="others flex">
 					<div class="rank">
 						<i v-if="index + 1 == 1" class="fas fa-crown crown"></i>
@@ -17,7 +17,7 @@
 					</div>
 				</div>
 			</div>
-			<Button text="Back to Games" />
+			<Button @click="redirect('join')" text="Back to Games" icon="fa fa-arrow-left" size="small" />
 		</div>
 	</div>
 </template>
@@ -32,19 +32,28 @@ import { GameService } from '@/services/Game';
 const route = useRoute();
 
 const state = reactive({
-	leaderboard: []
+	leaderboard: [],
 });
 
 async function fetchLeaderboard() {
 	let leaderboard = await GameService.getGameLeaderboard(route.params.id);
-	console.log("Leaderboard", leaderboard)
-	if (leaderboard) state.leaderboard = leaderboard;
+	if (leaderboard) state.leaderboard = leaderboard.slice(0, 5);
 }
 
 onMounted(() => fetchLeaderboard());
 </script>
 
 <style lang="css" scoped>
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	gap: 3.5rem;
+	position: relative;
+}
+
 .leaderboard-container {
 	display: flex;
 	flex-direction: column;
@@ -176,7 +185,6 @@ onMounted(() => fetchLeaderboard());
 .others {
 	display: flex;
 	width: 100%;
-	margin-top: 1rem;
 	align-items: center;
 	justify-content: center;
 }

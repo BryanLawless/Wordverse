@@ -34,10 +34,11 @@ const ValidationSchemas = {
 				'string.empty': 'Game name cannot be empty.',
 				'any.required': 'Game name is required.'
 			}),
-			players_allowed: Joi.number().greater(1).required().messages({
+			players_allowed: Joi.number().integer().greater(1).required().messages({
 				'number.base': 'Game players should only consist of numbers.',
 				'number.greater': 'There should be more than 1 player allowed.',
 				'number.empty': 'Players allowed should not be empty.',
+				'number.integer': 'Players allowed should be a whole number.', //⚠
 				'any.required': 'Players allowed is required.'
 			}),
 		}),
@@ -74,6 +75,14 @@ const ValidationSchemas = {
 				'string.max': 'Answer should contain at most 8 letters.',
 				'string.empty': 'Answer cannot be empty.',
 				'any.required': 'An answer is required.'
+			}),
+		}),
+
+		buyPowerup: Joi.object({
+			powerup: Joi.string().required().messages({
+				'string.base': 'Powerup should only consist of letters.',
+				'string.empty': 'Powerup cannot be empty.',
+				'any.required': 'A powerup is required.'
 			}),
 		}),
 	}

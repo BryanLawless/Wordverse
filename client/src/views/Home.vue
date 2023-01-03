@@ -21,10 +21,20 @@ import { redirect } from '@/helpers/Utility';
 </script>
 
 <style lang="css" scoped>
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	gap: 3.5rem;
+	position: relative;
+}
+
 .box {
 	padding: 2rem;
 	border-radius: 5rem;
-	transform: rotate(10deg);
+	animation: pulsing 0.9s ease-in-out alternate infinite;
 }
 
 .inner-box {
@@ -52,5 +62,15 @@ import { redirect } from '@/helpers/Utility';
 
 .main-text {
 	margin-right: 7px;
+}
+
+@keyframes pulsing {
+	from {
+		transform: scale(1);
+	}
+
+	to {
+		transform: scale(1.04);
+	}
 }
 </style>

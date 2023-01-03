@@ -59,7 +59,7 @@ class GameHandler {
 				return socket.emit(Events.ERROR_OCCURED, 'Nickname already exists in game.');
 			}
 
-			if (current == allowed) return socket.emit(Events.GAME_FULL);
+			if (current == allowed) return socket.emit(Events.ERROR_OCCURED, 'Game is full.');
 
 			PlayerStore.addPlayer(socket.id, game_id, nickname);
 

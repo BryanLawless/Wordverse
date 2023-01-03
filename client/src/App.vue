@@ -4,7 +4,6 @@
 		<router-view v-if="state.serverAvailable" v-slot="{ Component, route }">
 			<transition name="page-slide" mode="out-in">
 				<div :key="route.name">
-					<ToastManager />
 					<component :is="Component" />
 				</div>
 			</transition>
@@ -14,20 +13,21 @@
 
 <script setup>
 import { reactive } from 'vue';
-import ToastManager from '@/components/ToastManager.vue';
 import CheckingOnline from '@/components/home/CheckingOnline.vue';
 
 import ws from '@/gateway/Websocket';
-import { useToastStore } from '@/stores/Toast';
+import { useToast } from 'vue-toastification';
 
-const toastStore = useToastStore();
+const toast = useToast();
 
 const state = reactive({
 	serverAvailable: false
 });
 
 ws.on('ERROR_OCCURED', (error) => {
-	toastStore.addToast('error', error)
+	toast.error(error, {
+		timeout: 4000
+	});
 });
 </script>
 
