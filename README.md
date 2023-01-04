@@ -28,7 +28,7 @@ Wordverse is a multiplayer platform where users can create and join rooms to pla
 
 <br>
 
-## Requirements Met
+## ✅ Requirements Met
 
 Our project meets the following requirements from the guidelines stated here: [FBLA Topics](https://www.fbla-pbl.org/fbla-topics/).
 
@@ -68,6 +68,7 @@ Our project meets the following requirements from the guidelines stated here: [F
 ### Prerequisites
 
 - NodeJS 16+
+- A MongoDB Account
 
 1. Clone the repo `git clone https://github.com/TheLawlessDev/Wordverse.git`
 2. Open a terminal in the cloned folder.
@@ -101,7 +102,7 @@ This project has a lot of different parts, below is a description of the core fu
 - **Websocket Gateway & Game Flow**
   - When a user first loads onto the page, they are immediately connected to the websocket server.
     - This will be changed in the future, to where the user is connected to the websocket server once they login.
-  - The user will recieve a unique socket ID each time they connect.
+  - The user will receive a unique socket ID each time they connect.
   - **Game Flow**
     - When a user joins a game and chooses a nickname, they are added to the game room.
     - The game room is the ID of the game.
@@ -113,7 +114,7 @@ This project has a lot of different parts, below is a description of the core fu
   - The `TUTORIAL_PROGRESS` event is emitted to all players for each step in the selected game mode's tutorial.
   - The `GAME_TIMER_SET` event is emitted to all players in the game room after the tutorial is complete
     - A future timestamp is sent with this event to the client; the client will manage the timer. This saves server resources.
-  - The players will continue to recieve and send back events and data based on the game mode they are playing.
+  - The players will continue to receive and send back events and data based on the game mode they are playing.
   - Once the game concludes, the `GAME_OVER` event will be emitted to all players in the game room.
   - All players will then be redirected to the leaderboard or end game screen.
 
@@ -123,7 +124,7 @@ This project has a lot of different parts, below is a description of the core fu
 
 ## 🧹 Code Formatting and Structure
 
-- The layout and design of the frontend and backend is adapted from CLEAN architecture priciples. These design priciples seperate the presentation layer, logic layer, model layer, and database layer.
+- The layout and design of the frontend and backend is adapted from CLEAN architecture priciples. These design principles seperate the presentation layer, logic layer, model layer, and database layer.
 
 - Code and Variable Formatting **[ In Progress ]**
   - General variables and function arguments use camel case.
