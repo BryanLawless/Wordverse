@@ -27,6 +27,7 @@ import { useRoute } from 'vue-router';
 import { onMounted, reactive } from 'vue';
 import Button from '@/components/Button.vue';
 
+import { redirect } from '@/helpers/Utility';
 import { GameService } from '@/services/Game';
 
 const route = useRoute();
