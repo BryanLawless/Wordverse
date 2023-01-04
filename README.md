@@ -32,11 +32,16 @@ Wordverse is a multiplayer platform where users can create and join rooms to pla
 
 Our project meets the following requirements from the guidelines stated here: [FBLA Topics](https://www.fbla-pbl.org/fbla-topics/).
 
-[x] The game should be an executable game, either through the Internet or through a local installation.
-[x] The game should contain a scoreboard.
-[x] The game should contain a leaderboard and celebratory messages.
-[x] The game should have a minimum of three levels.
-[x] The game should have an instructional display.
+- [x] The game should be an executable game, either through the internet or through a local installation.
+  - The game can be ran using the internet, without any download.
+- [x] The game should contain a scoreboard.
+  - A scoreboard along with coin and trophy count are displayed to all players.
+- [x] The game should contain a leaderboard and celebratory messages.
+  - The user recieves messages depending on if they got a correct answer, a leaderboard is displayed at the end of the game.
+- [x] The game should have a minimum of three levels.
+  - The word level increases in difficultly depending on the score that you have.
+- [x] The game should have an instructional display.
+  - The game displays a tutorial to everyone before it starts.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
