@@ -20,7 +20,7 @@
 
 ## 📜 About the Project
 
-![Wordverse](./wordverse.png?raw=true "Optional Title")
+![Wordverse](./wordverse.png?raw=true "Wordverse Home")
 
 Wordverse is a multiplayer platform where users can create and join rooms to play a variety of competitive word games. We chose to use web technologies instead of platforms like Unity or other game frameworks. This allows users to play the game without any required download. It also opens the door for cross platform mobile and desktop applications down the road.
 
@@ -35,7 +35,7 @@ Wordverse is a multiplayer platform where users can create and join rooms to pla
 | ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)            | Frontend module and asset bundler.        | https://vitejs.dev/      |
 | ![Socket.io](https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101)   | Library for bi-directional communication. | https://socket.io/       |
 | ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)   | Database and storage solution.            | https://www.mongodb.com/ |
-| ![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)        | Hosting for backend API and gateway.      | https://render.com/      |
+| ![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)      | Hosting for backend API and gateway.      | https://www.heroku.com/  |
 | ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)      | Hosting for frontend and UI assets.       | https://vercel.com/      |
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
