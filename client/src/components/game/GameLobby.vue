@@ -39,12 +39,14 @@ const state = reactive({
 
 const emit = defineEmits(['gameStarting']);
 
-ws.on('UPDATE_PLAYER_LIST', (data) => {
-	state.players = data;
-});
+onBeforeMount(() => {
+	ws.on('UPDATE_PLAYER_LIST', (data) => {
+		state.players = data;
+	});
 
-ws.on('GAME_STARTING', () => {
-	emit('gameStarting');
+	ws.on('GAME_STARTING', () => {
+		emit('gameStarting');
+	});
 });
 
 function startGame() {

@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { reactive, onBeforeMount } from 'vue';
 import ws from '@/gateway/Websocket';
 
 const state = reactive({
@@ -18,9 +18,10 @@ const state = reactive({
 
 const emit = defineEmits(['tutorialFinished']);
 
-ws.on('TUTORIAL_PROGRESS', (step) => state.step = step);
-
-ws.on('TUTORIAL_FINISHED', () => emit('tutorialFinished'));
+onBeforeMount(() => {
+	ws.on('TUTORIAL_PROGRESS', (step) => state.step = step);
+	ws.on('TUTORIAL_FINISHED', () => emit('tutorialFinished'));
+});
 </script>
 
 <style lang="css" scoped>
