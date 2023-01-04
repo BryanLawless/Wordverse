@@ -24,6 +24,22 @@
 
 Wordverse is a multiplayer platform where users can create and join rooms to play a variety of competitive word games. We chose to use web technologies instead of platforms like Unity or other game frameworks. This allows users to play the game without any required download. It also opens the door for cross platform mobile and desktop applications down the road.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<br>
+
+## Requirements Met
+
+Our project meets the following requirements from the guidelines stated here: [FBLA Topics](https://www.fbla-pbl.org/fbla-topics/).
+
+[x] The game should be an executable game, either through the Internet or through a local installation.
+[x] The game should contain a scoreboard.
+[x] The game should contain a leaderboard and celebratory messages.
+[x] The game should have a minimum of three levels.
+[x] The game should have an instructional display.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <br>
 
 ## 🧰 Core Technologies Used
