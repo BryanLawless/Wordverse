@@ -28,7 +28,7 @@ Wordverse is a multiplayer platform where users can create and join rooms to pla
 
 <br>
 
-## ✅ Requirements Met
+## 📝 Requirements Met
 
 Our project meets the following requirements from the guidelines stated here: [FBLA Topics](https://www.fbla-pbl.org/fbla-topics/).
 
@@ -124,7 +124,7 @@ This project has a lot of different parts, below is a description of the core fu
 
 ## 🧹 Code Formatting and Structure
 
-- The layout and design of the frontend and backend is adapted from CLEAN architecture priciples. These design principles seperate the presentation layer, logic layer, model layer, and database layer.
+- The layout and design of the frontend and backend is adapted from CLEAN architecture principles. These design principles seperate the presentation layer, logic layer, model layer, and database layer.
 
 - Code and Variable Formatting **[ In Progress ]**
   - General variables and function arguments use camel case.
