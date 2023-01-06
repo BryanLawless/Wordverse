@@ -15,7 +15,7 @@ class GameStore {
 			players: 0,
 			players_allowed: players_allowed,
 			mode: 'scramble',
-			data: {}
+			started: false,
 		}
 
 		this.games.push(currentGame);
@@ -41,16 +41,6 @@ class GameStore {
 		return this.games.slice(0, amount);
 	}
 
-	getGameData(gameId, key) {
-		let currentIndex = this.games.findIndex((game) => game.game_id === gameId);
-
-		if (key in this.games[currentIndex].data) {
-			return this.games[currentIndex].data[key];
-		}
-
-		return null;
-	}
-
 	getPlayerCount(gameId) {
 		let currentIndex = this.games.findIndex((game) => game.game_id === gameId);
 
@@ -60,10 +50,28 @@ class GameStore {
 		}
 	}
 
+	toggleGameStarted(gameId) {
+		let currentIndex = this.games.findIndex((game) => game.game_id === gameId);
+
+		return this.games[currentIndex].started = !this.games[currentIndex].started;
+	}
+
 	incrementPlayerCount(gameId) {
 		let currentIndex = this.games.findIndex((game) => game.game_id === gameId);
 
 		return this.games[currentIndex].players++;
+	}
+
+	decrementPlayerCount(gameId) {
+		let currentIndex = this.games.findIndex((game) => game.game_id === gameId);
+
+		return this.games[currentIndex].players--;
+	}
+
+	isGameStarted(gameId) {
+		let currentIndex = this.games.findIndex((game) => game.game_id === gameId);
+
+		return this.games[currentIndex].started;
 	}
 
 	isGameHost(socketId) {
@@ -76,16 +84,6 @@ class GameStore {
 
 	removeGame(gameId) {
 		return this.games = this.games.filter((game) => game.game_id != gameId);
-	}
-
-	setGameData(gameId, key, data) {
-		let currentIndex = this.games.findIndex((game) => game.game_id === gameId);
-
-		if (key in this.games[currentIndex].data) {
-			return this.games[currentIndex].data[key] = data;
-		}
-
-		return false;
 	}
 }
 

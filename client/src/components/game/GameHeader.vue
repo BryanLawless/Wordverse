@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import { reactive, onBeforeMount } from 'vue';
+import { reactive, onBeforeUnmount } from 'vue';
 import GameTimer from './GameTimer.vue';
 
 import ws from '@/gateway/Websocket';
@@ -30,11 +30,16 @@ const state = reactive({
 	coins: 0,
 });
 
-onBeforeMount(() => {
-	ws.on('UPDATE_SCORE', (score) => state.score = score);
-	ws.on('UPDATE_COINS', (coins) => state.coins = coins);
-	ws.on('GAME_TIMER_SET', (time) => state.timestamp = time);
-});
+ws.on('UPDATE_SCORE', (score) => state.score = score);
+ws.on('UPDATE_COINS', (coins) => state.coins = coins);
+ws.on('GAME_TIMER_SET', (time) => state.timestamp = time);
+
+onBeforeUnmount(() => {
+	ws.off('UPDATE_SCORE');
+	ws.off('UPDATE_COINS');
+	ws.off('GAME_TIMER_SET');
+})
+
 </script>
 
 <style lang="css" scoped>

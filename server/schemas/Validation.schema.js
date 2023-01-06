@@ -34,11 +34,12 @@ const ValidationSchemas = {
 				'string.empty': 'Game name cannot be empty.',
 				'any.required': 'Game name is required.'
 			}),
-			players_allowed: Joi.number().integer().greater(1).required().messages({
+			players_allowed: Joi.number().integer().greater(1).max(30).required().messages({
 				'number.base': 'Game players should only consist of numbers.',
 				'number.greater': 'There should be more than 1 player allowed.',
+				'number.max': 'The maximum amount of players per game is 30.',
 				'number.empty': 'Players allowed should not be empty.',
-				'number.integer': 'Players allowed should be a whole number.', //⚠
+				'number.integer': 'Players allowed should be a whole number.',
 				'any.required': 'Players allowed is required.'
 			}),
 		}),

@@ -31,7 +31,7 @@
 </template>
  
 <script setup>
-import { onMounted, reactive } from 'vue';
+import { onMounted, onBeforeUnmount, reactive } from 'vue';
 import Button from '@/components/Button.vue';
 import SimpleLoader from '@/components/SimpleLoader.vue';
 
@@ -65,6 +65,11 @@ async function fetchGames() {
 }
 
 onMounted(async () => fetchGames());
+
+onBeforeUnmount(() => {
+	ws.off('GAME_CREATED');
+	ws.off('GAME_REMOVED');
+});
 </script>
 
 <style lang='css' scoped>

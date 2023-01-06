@@ -62,6 +62,9 @@ ws.on('HOST_DISCONNECT', () => redirect('join'));
 onBeforeUnmount(() => {
 	ws.emit('PLAYER_LEAVE');
 	stopMusic();
+
+	ws.off('GAME_NOT_FOUND');
+	ws.off('HOST_DISCONNECT');
 });
 
 </script>

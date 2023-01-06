@@ -21,16 +21,16 @@ const powerups = [
 		target: 'others'
 	},
 	{
+		name: 'robbery',
+		coins: 10,
+		duration: 0,
+		target: 'others'
+	},
+	{
 		name: 'lottery',
 		coins: 18,
 		duration: 0,
 		target: 'self'
-	},
-	{
-		name: 'robbery',
-		coins: 18,
-		duration: 0,
-		target: 'others'
 	},
 	{
 		name: 'setback',
@@ -102,6 +102,8 @@ class ScrambleHandler {
 		const players = PlayerStore.getPlayers(this.gameId);
 
 		let randomPlayer = players[Math.floor(Math.random() * players.length)];
+		if (!randomPlayer.player_socket_id) return {};
+
 		while (randomPlayer.player_socket_id === socket.id) {
 			randomPlayer = players[Math.floor(Math.random() * players.length)];
 		}
@@ -153,7 +155,7 @@ class ScrambleHandler {
 		let { answer } = data;
 
 		if (answer.toLowerCase() === player.answer.toLowerCase()) {
-			let coins = Utility.randomNumberBetween(1, 3);
+			let coins = Utility.randomNumberBetween(1, 5);
 
 			let playerCoins = PlayerStore.addCoins(socket.id, coins);
 			socket.emit(Events.UPDATE_COINS, playerCoins);
@@ -179,9 +181,6 @@ class ScrambleHandler {
 		if (!powerup) return socket.emit(Events.ERROR_OCCURED, 'Invalid powerup.');
 		if (player.coins < powerup.coins) return socket.emit(Events.ERROR_OCCURED, 'You do not have enough coins to purchase this powerup.');
 
-		let playerCoins = PlayerStore.removeCoins(socket.id, powerup.coins);
-		socket.emit(Events.UPDATE_COINS, playerCoins);
-
 		let target = socket;
 		switch (powerup.target) {
 			case 'self':
@@ -191,6 +190,8 @@ class ScrambleHandler {
 				target = this.getRandomPlayerSocketExclude(socket);
 				break;
 		}
+
+		if (target.length == 0) return;
 
 		switch (powerup.name) {
 			case 'scramble':
@@ -209,8 +210,8 @@ class ScrambleHandler {
 				}
 				break;
 			case 'robbery':
-				let randomRobbery = Utility.randomNumberBetween(1, 4);
-				if (randomRobbery != 4) {
+				let randomRobbery = Utility.randomNumberBetween(1, 10);
+				if (randomRobbery != 10) {
 					let randomCoinsToSteal = Utility.randomNumberBetween(1, 5);
 					let victimCoinRemove = PlayerStore.removeCoins(target.id, randomCoinsToSteal);
 					target.emit(Events.UPDATE_COINS, victimCoinRemove);
@@ -224,6 +225,9 @@ class ScrambleHandler {
 				target.emit(Events.UPDATE_SCORE, playerScore);
 				break;
 		}
+
+		let playerCoins = PlayerStore.removeCoins(socket.id, powerup.coins);
+		socket.emit(Events.UPDATE_COINS, playerCoins);
 
 		socket.emit(Events.POWERUP_USED, powerup.name);
 	}

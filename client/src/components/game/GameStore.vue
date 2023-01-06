@@ -24,17 +24,17 @@
 				</div>
 				<div class="powerup-row">
 					<div class="powerup">
-						<h3>Lottery</h3>
-						<p>15% chance to double your money.</p>
-						<button @click="usePowerup('lottery')" class="powerup-price">
+						<h3>Robbery</h3>
+						<p>Steals another player's money. 10% chance of failure.</p>
+						<button @click="usePowerup('robbery')" class="powerup-price">
 							<img src="/src/assets/images/coin.png" class="value-graphic">
-							<span> 18</span>
+							<span> 10</span>
 						</button>
 					</div>
 					<div class="powerup">
-						<h3>Robbery</h3>
-						<p>25% chance of failure. Steals another player's money.</p>
-						<button @click="usePowerup('robbery')" class="powerup-price">
+						<h3>Lottery</h3>
+						<p>15% chance to double your money.</p>
+						<button @click="usePowerup('lottery')" class="powerup-price">
 							<img src="/src/assets/images/coin.png" class="value-graphic">
 							<span> 18</span>
 						</button>

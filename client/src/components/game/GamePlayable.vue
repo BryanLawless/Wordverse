@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { reactive, onBeforeMount } from 'vue';
+import { onBeforeUnmount, reactive } from 'vue';
 import GameStore from './GameStore.vue';
 import Freeze from './effects/Freeze.vue';
 import Button from '@/components/Button.vue';
@@ -46,36 +46,44 @@ function checkWord() {
 	state.answer = '';
 }
 
-onBeforeMount(() => {
-	ws.on('GAME_OVER', () => emit('gameOver'));
-	ws.on('CORRECT_GUESS', () => toast.success('Correct Guess!'));
-	ws.on('INCORRECT_GUESS', () => toast.error('Incorrect Guess!'));
+ws.on('GAME_OVER', () => emit('gameOver'));
+ws.on('CORRECT_GUESS', () => toast.success('Correct Guess!'));
+ws.on('INCORRECT_GUESS', () => toast.error('Incorrect Guess!'));
 
-	ws.on('POWERUP_USED', (powerup) => {
-		toast(`You used the ${powerup} powerup!`);
-	})
+ws.on('POWERUP_USED', (powerup) => {
+	toast(`You used the ${powerup} powerup!`);
+})
 
-	ws.on('POWERUP_RECIEVED', (powerup) => {
-		switch (powerup.name) {
-			case 'freeze':
-				toast(`You have been frozen for ${powerup.duration / 1000} seconds!`, { timeout: 10000, pauseOnFocusLoss: false });
-				state.effect = 'freeze';
-				break;
-		}
-	});
+ws.on('POWERUP_RECIEVED', (powerup) => {
+	switch (powerup.name) {
+		case 'freeze':
+			toast(`You have been frozen for ${powerup.duration / 1000} seconds!`, { timeout: 10000, pauseOnFocusLoss: false });
+			state.effect = 'freeze';
+			break;
+	}
+});
 
-	ws.on('POWERUP_EFFECT_CLEARED', (effect) => {
-		switch (effect) {
-			case 'freeze':
-				state.effect = '';
-				break;
-		}
-	});
+ws.on('POWERUP_EFFECT_CLEARED', (effect) => {
+	switch (effect) {
+		case 'freeze':
+			state.effect = '';
+			break;
+	}
+});
 
-	ws.on('NEW_LETTERS', (data) => {
-		state.letters = data.letters;
-		state.definition = data.definition;
-	});
+ws.on('NEW_LETTERS', (data) => {
+	state.letters = data.letters;
+	state.definition = data.definition;
+});
+
+onBeforeUnmount(() => {
+	ws.off('GAME_OVER');
+	ws.off('CORRECT_GUESS');
+	ws.off('INCORRECT_GUESS');
+	ws.off('POWERUP_USED');
+	ws.off('POWERUP_RECIEVED');
+	ws.off('POWERUP_EFFECT_CLEARED');
+	ws.off('NEW_LETTERS');
 });
 </script>
 

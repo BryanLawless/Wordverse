@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { onBeforeMount, reactive } from 'vue';
+import { onBeforeMount, onBeforeUnmount, reactive } from 'vue';
 import Button from '@/components/Button.vue';
 
 import ws from '@/gateway/Websocket';
@@ -39,14 +39,12 @@ const state = reactive({
 
 const emit = defineEmits(['gameStarting']);
 
-onBeforeMount(() => {
-	ws.on('UPDATE_PLAYER_LIST', (data) => {
-		state.players = data;
-	});
+ws.on('UPDATE_PLAYER_LIST', (data) => state.players = data);
+ws.on('GAME_STARTING', () => emit('gameStarting'));
 
-	ws.on('GAME_STARTING', () => {
-		emit('gameStarting');
-	});
+onBeforeUnmount(() => {
+	ws.off('UPDATE_PLAYER_LIST');
+	ws.off('GAME_STARTING');
 });
 
 function startGame() {

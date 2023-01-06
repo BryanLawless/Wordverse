@@ -41,6 +41,8 @@ class GameHandler {
 			return socket.emit(Events.ERROR_OCCURED, 'Not enough players to start game.');
 		}
 
+		GameStore.toggleGameStarted(game_id);
+
 		io.to(game_id).emit(Events.GAME_STARTING);
 
 		let modeInstance = new GameModeLookup[currentGame.mode](io, socket);
@@ -60,6 +62,7 @@ class GameHandler {
 			}
 
 			if (current == allowed) return socket.emit(Events.ERROR_OCCURED, 'Game is full.');
+			if (GameStore.isGameStarted(game_id)) return socket.emit(Events.ERROR_OCCURED, 'Game has already started.');
 
 			PlayerStore.addPlayer(socket.id, game_id, nickname);
 
@@ -78,30 +81,32 @@ class GameHandler {
 
 	leaveHandle = async (io, socket) => {
 		if (GameStore.isGameHost(socket.id)) {
-			let hostGame = GameStore.getGameByHostId(socket.id);
-			io.to(hostGame.game_id).emit(Events.HOST_DISCONNECT);
+			let { game_id } = GameStore.getGameByHostId(socket.id);
+			io.to(game_id).emit(Events.HOST_DISCONNECT);
 
-			PlayerStore.removePlayers(hostGame.game_id);
-			GameStore.removeGame(hostGame.game_id);
-			socket.leave(hostGame.game_id);
+			PlayerStore.removePlayers(game_id);
+			GameStore.removeGame(game_id);
+			socket.leave(game_id);
 
-			io.sockets.emit(Events.GAME_REMOVED, hostGame.game_id);
+			io.sockets.emit(Events.GAME_REMOVED, game_id);
 		} else {
-			let playerDisconnect = PlayerStore.getPlayer(socket.id);
+			let { game_id } = PlayerStore.getPlayer(socket.id);
+
+			//GameStore.decrementPlayerCount(game_id);
 			PlayerStore.removePlayer(socket.id);
 
-			let remaingingPlayers = PlayerStore.getPlayers(playerDisconnect.game_id);
-			io.to(playerDisconnect.game_id).emit(Events.UPDATE_PLAYER_LIST, remaingingPlayers);
+			let remaingingPlayers = PlayerStore.getPlayers(game_id);
+			io.to(game_id).emit(Events.UPDATE_PLAYER_LIST, remaingingPlayers);
 
-			socket.leave(playerDisconnect.game_id);
+			socket.leave(game_id);
 		}
 	}
 
-	leave = async (io, socket, data) => {
-		this.leaveHandle(io, socket)
+	leave = async (io, socket, _) => {
+		this.leaveHandle(io, socket);
 	}
 
-	disconnect = async (io, socket, data) => {
+	disconnect = async (io, socket, _) => {
 		if (PlayerStore.playerInGame(socket.id)) {
 			this.leaveHandle(io, socket);
 		}

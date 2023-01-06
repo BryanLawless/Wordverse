@@ -18,14 +18,12 @@
 	text-decoration: none;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	text-rendering: optimizeLegibility;
 }
 
 body {
 	color: var(--text-primary-color);
 	background: var(--background-color-primary);
 	font-family: 'Russo One', sans-serif;
-	-webkit-font-smoothing: antialiased;
 	transition: all ease-in-out .3s;
 }
 
@@ -139,12 +137,15 @@ a {
 	padding: 1rem 1.50rem;
 	outline: none;
 	border-radius: 2rem;
-	color: #fff;
+	color: #f7f7f7;
 	background: #924ce1;
 	text-transform: unset;
-	text-rendering: optimizeLegibility;
 	border: 3px solid #924ce1;
 	transition: 0.1s;
+}
+
+.input-field::placeholder {
+	color: #ccb6e6;
 }
 
 .input-field:focus {
