@@ -62,12 +62,6 @@ class GameStore {
 		return this.games[currentIndex].players++;
 	}
 
-	decrementPlayerCount(gameId) {
-		let currentIndex = this.games.findIndex((game) => game.game_id === gameId);
-
-		return this.games[currentIndex].players--;
-	}
-
 	isGameStarted(gameId) {
 		let currentIndex = this.games.findIndex((game) => game.game_id === gameId);
 
