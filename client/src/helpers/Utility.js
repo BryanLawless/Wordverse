@@ -57,3 +57,11 @@ export async function serverOnline() {
 
 	return onlinePromise;
 }
+
+export function webRtcSupported() {
+	return navigator.getUserMedia ||
+		navigator.webkitGetUserMedia ||
+		navigator.mozGetUserMedia ||
+		navigator.msGetUserMedia ||
+		window.RTCPeerConnection;
+}

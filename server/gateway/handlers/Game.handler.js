@@ -1,8 +1,15 @@
 const Events = require('../Events');
+const Config = require('../../config/Config');
 const Validation = require('../../helpers/Validate');
 const GameStore = require('../../stores/Game.store');
 const PlayerStore = require('../../stores/Player.store');
 const ValidationSchemas = require('../../schemas/Validation.schema');
+
+/*
+TODO: Implement voice chat
+const twilio = require('twilio')(Config.VOICE.TWILIO_ACCOUNT_SID, Config.VOICE.TWILIO_AUTH_TOKEN, {
+	lazyLoading: true
+});*/
 
 const GameModeLookup = {
 	'scramble': require('./Scramble.handler'),
@@ -70,6 +77,8 @@ class GameHandler {
 			socket.join(game_id);
 
 			GameStore.incrementPlayerCount(game_id);
+
+			if (playerList.length == 1) io.to(game_id).emit(Events.INITIATE_VOICE_CALL);
 
 			io.to(game_id).emit(Events.UPDATE_PLAYER_LIST, playerList);
 

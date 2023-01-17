@@ -12,6 +12,15 @@ const getDefinition = async (word) => {
 	}
 }
 
+generateVoiceToken = async (twilio) => {
+	return await twilio.tokens.create(function (error, response) {
+		if (error) return false;
+
+		return response;
+	});
+}
+
 module.exports = {
-	getDefinition
+	getDefinition,
+	generateVoiceToken
 }

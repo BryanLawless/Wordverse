@@ -7,6 +7,7 @@ function registerSocketServer(server) {
 			origin: config.CLIENT_URL,
 			methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
 		},
+		transport: ['websocket']
 	});
 
 	io.on('connection', (socket) => {

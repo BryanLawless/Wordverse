@@ -20,11 +20,11 @@
 import { onBeforeUnmount, reactive } from 'vue';
 import GameStore from './GameStore.vue';
 import Freeze from './effects/Freeze.vue';
+import GameHeader from './GameHeader.vue';
 import Button from '@/components/Button.vue';
 import { useToast } from 'vue-toastification';
 
 import ws from '@/gateway/Websocket';
-import GameHeader from './GameHeader.vue';
 
 const toast = useToast();
 

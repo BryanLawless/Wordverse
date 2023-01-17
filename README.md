@@ -88,7 +88,7 @@ Our project meets the following requirements from the guidelines stated here: [F
 
 This project has a lot of different parts, below is a description of the core functionalities.
 
-- **API & Authentication Flow [ In Progress ]**
+- **REST API & Authentication Flow [ Not fully implemented ]**
 
   - When a user fills out an authentication form (eg. login, register), a JSON payload is sent to the server authentication endpoint: `POST api/auth/login/`.
   - The authentication endpoint creates and signs a JWT token if the credentials are valid and correct.
@@ -116,7 +116,7 @@ This project has a lot of different parts, below is a description of the core fu
     - A future timestamp is sent with this event to the client; the client will manage the timer. This saves server resources.
   - The players will continue to receive and send back events and data based on the game mode they are playing.
   - Once the game concludes, the `GAME_OVER` event will be emitted to all players in the game room.
-  - All players will then be redirected to the leaderboard or end game screen.
+  - All players in the game room will then be redirected to the leaderboard or end game screen.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -140,12 +140,13 @@ This project has a lot of different parts, below is a description of the core fu
 
 ## 🚧 Future Roadmap
 
-- [ ] Add account system for customization and security.
+- [ ] Redesign websocket session infastucture.
 - [ ] Improve spam protection.
-- [ ] Use Mongo for saving game state instead of memory.
 - [ ] Text and voice chat.
 - [ ] Design improvements.
 - [ ] Different game-modes.
+- [ ] Use Mongo for saving game state instead of memory.
+- [ ] Add account system for customization and security.
 
 See the [open issues](https://github.com/TheLawlessDev/Wordverse/issues) for a full list of proposed features as well as known issues.
 

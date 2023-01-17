@@ -25,7 +25,7 @@
 				<div class="powerup-row">
 					<div class="powerup">
 						<h3>Robbery</h3>
-						<p>Steals another player's money. 10% chance of failure.</p>
+						<p>90% chance to steal another players money and get what you spent back.</p>
 						<button @click="usePowerup('robbery')" class="powerup-price">
 							<img src="/src/assets/images/coin.png" class="value-graphic">
 							<span> 10</span>
@@ -33,10 +33,10 @@
 					</div>
 					<div class="powerup">
 						<h3>Lottery</h3>
-						<p>15% chance to double your money.</p>
+						<p>15% chance to double your money and get what you spent back.</p>
 						<button @click="usePowerup('lottery')" class="powerup-price">
 							<img src="/src/assets/images/coin.png" class="value-graphic">
-							<span> 18</span>
+							<span> 12</span>
 						</button>
 					</div>
 				</div>
@@ -46,7 +46,7 @@
 						<p>Set another player's score back by 5.</p>
 						<button @click="usePowerup('setback')" class="powerup-price">
 							<img src="/src/assets/images/coin.png" class="value-graphic">
-							<span> 20</span>
+							<span> 15</span>
 						</button>
 					</div>
 				</div>

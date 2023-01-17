@@ -28,13 +28,13 @@ const powerups = [
 	},
 	{
 		name: 'lottery',
-		coins: 18,
+		coins: 12,
 		duration: 0,
 		target: 'self'
 	},
 	{
 		name: 'setback',
-		coins: 20,
+		coins: 15,
 		duration: 0,
 		target: 'others'
 	},
@@ -193,6 +193,9 @@ class ScrambleHandler {
 
 		if (target.length == 0) return;
 
+		let playerCoins = PlayerStore.removeCoins(socket.id, powerup.coins);
+		socket.emit(Events.UPDATE_COINS, playerCoins);
+
 		switch (powerup.name) {
 			case 'scramble':
 				this.constructor.generateShuffleSetAnswer(target);
@@ -205,7 +208,7 @@ class ScrambleHandler {
 			case 'lottery':
 				let randomLottery = Utility.randomNumberBetween(1, 15);
 				if (randomLottery == 15) {
-					let playerCoins = PlayerStore.addCoins(target.id, player.coins * 2);
+					let playerCoins = PlayerStore.addCoins(target.id, (player.coins * 2) + powerup.coins);
 					target.emit(Events.UPDATE_COINS, playerCoins);
 				}
 				break;
@@ -225,9 +228,6 @@ class ScrambleHandler {
 				target.emit(Events.UPDATE_SCORE, playerScore);
 				break;
 		}
-
-		let playerCoins = PlayerStore.removeCoins(socket.id, powerup.coins);
-		socket.emit(Events.UPDATE_COINS, playerCoins);
 
 		socket.emit(Events.POWERUP_USED, powerup.name);
 	}
