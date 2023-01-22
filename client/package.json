@@ -12,6 +12,7 @@
   "dependencies": {
     "@vueuse/core": "^9.11.0",
     "axios": "^1.2.2",
+    "peerjs": "^1.4.7",
     "pinia": "^2.0.29",
     "socket.io-client": "^4.5.4",
     "vue": "^3.2.45",

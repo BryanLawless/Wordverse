@@ -65,3 +65,13 @@ export function webRtcSupported() {
 		navigator.msGetUserMedia ||
 		window.RTCPeerConnection;
 }
+
+export function getAudio() {
+	return navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+}
+
+export function stopStreams(stream) {
+	stream.getTracks().forEach(function (track) {
+		if (track.readyState === 'live') track.stop();
+	});
+}

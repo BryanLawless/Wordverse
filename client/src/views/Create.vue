@@ -41,7 +41,7 @@ function createGame() {
 	align-items: center;
 	justify-content: center;
 	height: 100vh;
-	gap: 3.5rem;
+	gap: 1.5rem;
 	position: relative;
 }
 

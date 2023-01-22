@@ -1,8 +1,9 @@
 <template>
 	<button class="btn">
 		<span class="edge"></span>
-		<span class="front" :class="btnSize"><i v-if="props.icon" :class="props.icon"></i> {{ props.text
-			}}</span>
+		<span class="front" :class="btnSize"><i v-if="props.icon" :class="props.icon"></i> {{
+			props.text
+		}}</span>
 	</button>
 </template>
 
@@ -54,7 +55,7 @@ switch (props.size) {
 	width: 100%;
 	height: 100%;
 	border-radius: 1rem;
-	background: #e48f07;
+	background: #dbae86;
 }
 
 .front {

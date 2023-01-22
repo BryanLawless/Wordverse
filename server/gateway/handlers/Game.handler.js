@@ -5,9 +5,7 @@ const GameStore = require('../../stores/Game.store');
 const PlayerStore = require('../../stores/Player.store');
 const ValidationSchemas = require('../../schemas/Validation.schema');
 
-/*
-TODO: Implement voice chat
-const twilio = require('twilio')(Config.VOICE.TWILIO_ACCOUNT_SID, Config.VOICE.TWILIO_AUTH_TOKEN, {
+/*const twilio = require('twilio')(Config.VOICE.TWILIO_ACCOUNT_SID, Config.VOICE.TWILIO_AUTH_TOKEN, {
 	lazyLoading: true
 });*/
 

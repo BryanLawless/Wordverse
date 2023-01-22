@@ -154,7 +154,7 @@ See the [open issues](https://github.com/TheLawlessDev/Wordverse/issues) for a f
 
 <br>
 
-## License
+## 📜 License
 
 Distributed under the GNU Affero General Public License v3.0. See `LICENSE` or https://choosealicense.com/licenses/agpl-3.0/ for more information.
 
