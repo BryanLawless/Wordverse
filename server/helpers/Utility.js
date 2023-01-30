@@ -22,6 +22,10 @@ const millisToSeconds = (millis) => {
 	return Math.floor(millis / 1000);
 }
 
+const secondsToMillis = (seconds) => {
+	return Math.floor(seconds * 1000);
+}
+
 const shuffle = (word) => {
 	let chunks = word.split('');
 
@@ -45,6 +49,7 @@ module.exports = {
 	isNumeric,
 	delay,
 	millisToSeconds,
+	secondsToMillis,
 	shuffle,
 	randomNumberBetween
 }

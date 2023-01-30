@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { onBeforeUnmount, onMounted, reactive } from 'vue';
 import CheckingOnline from '@/components/home/CheckingOnline.vue';
 
 import ws from '@/gateway/Websocket';
@@ -28,6 +28,10 @@ ws.on('ERROR_OCCURED', (error) => {
 	toast.error(error, {
 		timeout: 4000
 	});
+});
+
+onBeforeUnmount(() => {
+	ws.off('ERROR_OCCURED');
 });
 </script>
 

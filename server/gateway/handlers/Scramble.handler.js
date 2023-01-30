@@ -47,7 +47,7 @@ class ScrambleHandler {
 		this.hostSocket = hostSocket;
 
 		this.name = 'scramble';
-		this.time = 300000;
+		this.time = 300;
 		this.tutorial = [
 			'Unscramble as many words as you can before the timer runs out.',
 			'Each word you unscramble will give you coins.',
@@ -124,11 +124,12 @@ class ScrambleHandler {
 		this.io.to(this.gameId).emit(Events.TUTORIAL_FINISHED);
 
 		let time = new Date();
-		let timeSeconds = Utility.millisToSeconds(this.time);
+		let timeMilliseconds = Utility.secondsToMillis(this.time);
+		let timeSeconds = Utility.millisToSeconds(timeMilliseconds);
 		time.setSeconds(time.getSeconds() + timeSeconds);
 
 		this.io.to(this.gameId).emit(Events.GAME_TIMER_SET, time.toUTCString());
-		Utility.delay(this.time).then(() => {
+		Utility.delay(timeMilliseconds).then(() => {
 			this.io.to(this.gameId).emit(Events.GAME_OVER);
 		});
 
