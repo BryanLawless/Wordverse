@@ -50,7 +50,7 @@ class PlayerStore {
 		if (this.players[playerIndex]) return this.players[playerIndex].coins;
 	}
 
-	getScore() {
+	getScore(playerSocketId) {
 		let playerIndex = this.getPlayerIndex(playerSocketId);
 
 		if (this.players[playerIndex]) return this.players[playerIndex].score;
