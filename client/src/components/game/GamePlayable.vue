@@ -8,10 +8,13 @@
 				<h2 class="letters-title">Letters: </h2>
 				<h1 class="scrambled-letters">{{ state.letters }}</h1>
 				<p class="definition">{{ state.definition }}</p>
-				<input type="text" class="input-field" placeholder="Answer" v-model="state.answer">
-				<div class="game-controls">
-					<Button @click="checkWord" text="Check Word" icon="fa-solid fa-check" small="small" />
-				</div>
+				<form @submit.prevent="checkWord" class="guess-inputs">
+					<div>
+						<input type="text" class="input-field guess-field" placeholder="Answer" v-model="state.answer">
+					</div>
+					<div><Button type="submit" class="guess-button" text="Check Word" icon="fa-solid fa-check"
+							size="small" /></div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -110,13 +113,15 @@ onBeforeUnmount(() => {
 	gap: 1rem;
 	padding: 2rem;
 	border-radius: 1rem;
-	width: 30rem;
+	width: 35rem;
 }
 
-.game-controls {
+.guess-inputs {
 	display: flex;
 	flex-direction: row;
-	gap: 1rem;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
 }
 
 .letters-title {

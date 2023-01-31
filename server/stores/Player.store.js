@@ -44,6 +44,12 @@ class PlayerStore {
 		}
 	}
 
+	getCoins(playerSocketId) {
+		let playerIndex = this.getPlayerIndex(playerSocketId);
+
+		if (this.players[playerIndex]) return this.players[playerIndex].coins;
+	}
+
 	addCoins(playerSocketId, coins) {
 		let playerIndex = this.getPlayerIndex(playerSocketId);
 

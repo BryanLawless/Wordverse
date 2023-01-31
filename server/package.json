@@ -1,7 +1,7 @@
 {
-  "name": "wordverse-server",
+  "name": "@wordverse/server",
   "version": "1.0.0",
-  "description": "",
+  "description": "The official Wordverse multiplayer server.",
   "main": "./server/index.js",
   "scripts": {
     "dev": "nodemon",

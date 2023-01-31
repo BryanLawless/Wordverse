@@ -16,6 +16,14 @@
 			</div>
 			<div class="game-powerup-container">
 				<div class="powerup">
+					<h3>Re-Scramble</h3>
+					<p>Re-scrambles your word if your stuck.</p>
+					<button @click="usePowerup('scramble')" class="powerup-price">
+						<img src="/src/assets/images/coin.png" class="value-graphic">
+						<span> 2</span>
+					</button>
+				</div>
+				<div class="powerup">
 					<h3>Freeze</h3>
 					<p>Freeze a random player for 10 seconds.</p>
 					<button @click="usePowerup('freeze')" class="powerup-price">
@@ -24,16 +32,8 @@
 					</button>
 				</div>
 				<div class="powerup">
-					<h3>Re-Scramble</h3>
-					<p>Re-scrambles a random players word.</p>
-					<button @click="usePowerup('scramble')" class="powerup-price">
-						<img src="/src/assets/images/coin.png" class="value-graphic">
-						<span> 9</span>
-					</button>
-				</div>
-				<div class="powerup">
 					<h3>Robbery</h3>
-					<p>90% chance to steal another players money and get what you spent back.</p>
+					<p>50% chance to steal another players money and get what you spent back.</p>
 					<button @click="usePowerup('robbery')" class="powerup-price">
 						<img src="/src/assets/images/coin.png" class="value-graphic">
 						<span> 10</span>
@@ -49,7 +49,7 @@
 				</div>
 				<div class="powerup">
 					<h3>Setback</h3>
-					<p>Set another player's score back by 5.</p>
+					<p>Set another player's score back by five trophies.</p>
 					<button @click="usePowerup('setback')" class="powerup-price">
 						<img src="/src/assets/images/coin.png" class="value-graphic">
 						<span> 15</span>
@@ -102,7 +102,7 @@ onBeforeUnmount(() => {
 .inner-container {
 	display: flex;
 	width: 100%;
-	gap: 2rem;
+	gap: 1rem;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	align-items: center;
@@ -149,7 +149,7 @@ onBeforeUnmount(() => {
 .powerup {
 	display: flex;
 	flex-direction: column;
-	background: #866aec;
+	background: #8a69ff;
 	padding: 2rem;
 	border-radius: 1rem;
 	max-width: 20rem;

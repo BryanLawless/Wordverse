@@ -16,7 +16,6 @@
 	width: 100%;
 	height: 100%;
 	z-index: 999;
-	border-radius: 16px;
 	background: rgba(146, 219, 255, 0.56);
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 	backdrop-filter: blur(11.7px);

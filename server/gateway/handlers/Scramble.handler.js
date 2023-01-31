@@ -9,15 +9,15 @@ const ValidationSchemas = require('../../schemas/Validation.schema');
 
 const powerups = [
 	{
+		name: 'scramble',
+		coins: 2,
+		duration: 0,
+		target: 'self'
+	},
+	{
 		name: 'freeze',
 		coins: 6,
 		duration: 10000,
-		target: 'others'
-	},
-	{
-		name: 'scramble',
-		coins: 9,
-		duration: 0,
 		target: 'others'
 	},
 	{
@@ -214,11 +214,19 @@ class ScrambleHandler {
 				}
 				break;
 			case 'robbery':
-				let randomRobbery = Utility.randomNumberBetween(1, 10);
-				if (randomRobbery != 10) {
-					let randomCoinsToSteal = Utility.randomNumberBetween(1, 5);
-					let victimCoinRemove = PlayerStore.removeCoins(target.id, randomCoinsToSteal);
-					target.emit(Events.UPDATE_COINS, victimCoinRemove);
+				let randomRobbery = Utility.randomNumberBetween(1, 2);
+				if (randomRobbery == 1) {
+					let targetCoins = PlayerStore.getCoins(target);
+					let randomCoinsToSteal = Utility.randomNumberBetween(1, 10);
+
+					if (randomCoinsToSteal > targetCoins && targetCoins > 0) randomCoinsToSteal = targetCoins;
+
+					if (randomCoinsToSteal > 0) {
+						let victimCoinRemove = PlayerStore.removeCoins(target.id, randomCoinsToSteal);
+						target.emit(Events.UPDATE_COINS, victimCoinRemove);
+					} else {
+						randomCoinsToSteal = 2;
+					}
 
 					let thiefCoinsGain = PlayerStore.addCoins(socket.id, randomCoinsToSteal + powerup.coins);
 					socket.emit(Events.UPDATE_COINS, thiefCoinsGain);
