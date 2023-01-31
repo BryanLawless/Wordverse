@@ -219,21 +219,24 @@ class ScrambleHandler {
 					let targetCoins = PlayerStore.getCoins(target.id);
 					let randomCoinsToSteal = Utility.randomNumberBetween(1, 10);
 
-					if (randomCoinsToSteal > targetCoins && targetCoins > 0) randomCoinsToSteal = targetCoins;
+					if (targetCoins < randomCoinsToSteal) randomCoinsToSteal = targetCoins;
+					if (randomCoinsToSteal == 0) return socket.emit(Events.ERROR_OCCURED, 'The victim has no coins to steal.');
 
-					if (randomCoinsToSteal > 0) {
-						let victimCoinRemove = PlayerStore.removeCoins(target.id, randomCoinsToSteal);
-						target.emit(Events.UPDATE_COINS, victimCoinRemove);
-					} else {
-						randomCoinsToSteal = 2;
-					}
+					let victimCoinRemove = PlayerStore.removeCoins(target.id, randomCoinsToSteal);
+					target.emit(Events.UPDATE_COINS, victimCoinRemove);
 
 					let thiefCoinsGain = PlayerStore.addCoins(socket.id, randomCoinsToSteal + powerup.coins);
 					socket.emit(Events.UPDATE_COINS, thiefCoinsGain);
 				}
 				break;
 			case 'setback':
-				let playerScore = PlayerStore.removeScore(target.id, 5);
+				let setbackScore = 5;
+				let currentPlayerScore = PlayerStore.getScore(socket.id);
+
+				if (setbackScore < currentPlayerScore) setbackScore = currentPlayerScore;
+				if (setbackScore == 0) return socket.emit(Events.ERROR_OCCURED, 'The victim already has a score of zero.');
+
+				let playerScore = PlayerStore.removeScore(target.id, setbackScore);
 				target.emit(Events.UPDATE_SCORE, playerScore);
 				break;
 		}

@@ -29,7 +29,7 @@ module.exports = {
 		try {
 			mongoose.connect(config.DB.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 		} catch (error) {
-			throw new Error(error.message);
+			console.log('Ingnorable error (for now): ' + error.message);
 		}
 	}
 };
