@@ -216,7 +216,7 @@ class ScrambleHandler {
 			case 'robbery':
 				let randomRobbery = Utility.randomNumberBetween(1, 2);
 				if (randomRobbery == 1) {
-					let targetCoins = PlayerStore.getCoins(target);
+					let targetCoins = PlayerStore.getCoins(target.id);
 					let randomCoinsToSteal = Utility.randomNumberBetween(1, 10);
 
 					if (randomCoinsToSteal > targetCoins && targetCoins > 0) randomCoinsToSteal = targetCoins;
