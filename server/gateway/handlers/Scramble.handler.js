@@ -231,9 +231,9 @@ class ScrambleHandler {
 				break;
 			case 'setback':
 				let setbackScore = 5;
-				let currentPlayerScore = PlayerStore.getScore(socket.id);
+				let targetPlayerScore = PlayerStore.getScore(target.id);
 
-				if (setbackScore < currentPlayerScore) setbackScore = currentPlayerScore;
+				if (targetPlayerScore < setbackScore) setbackScore = targetPlayerScore;
 				if (setbackScore == 0) return socket.emit(Events.ERROR_OCCURED, 'The victim already has a score of zero.');
 
 				let playerScore = PlayerStore.removeScore(target.id, setbackScore);

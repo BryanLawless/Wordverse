@@ -2,11 +2,12 @@ const cors = require('cors');
 const express = require('express');
 const router = require('./router');
 const passport = require('passport');
+const pkg = require('./package.json');
 const config = require('./config/Config');
+const httpStatus = require('http-status');
 const cookieParser = require('cookie-parser');
 const database = require('./database/Database');
 const WordGenerator = require('./modules/words/Generate');
-const httpStatus = require('http-status');
 
 const app = express();
 
@@ -30,7 +31,7 @@ require('./config/Passport')(passport);
 app.use('/api', router);
 
 app.use('', (req, res) => {
-	res.status(httpStatus.OK).send('Wordverse API active.');
+	res.status(httpStatus.OK).send(`Wordverse v(${pkg.version}) API active.`);
 });
 
 WordGenerator.loadWords().then(() => {
