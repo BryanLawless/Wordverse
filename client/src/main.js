@@ -1,21 +1,19 @@
-import { createApp } from 'vue';
-import { createPinia } from 'pinia';
+import { createApp } from "vue";
+import { createPinia } from "pinia";
 
-import App from './App.vue';
-import router from './router/Router';
+import App from "./App.vue";
+import router from "./router/router";
 
-import setupInterceptors from './api/Interceptors';
-import { useAuthStore } from './stores/Auth';
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
 
-import './assets/css/normalize.css';
-import './assets/css/base.css';
+import "./assets/css/base.css";
 
+/* Create a pinia instance */
 const pinia = createPinia();
 
 createApp(App)
 	.use(pinia)
 	.use(router)
-	.mount('#app');
-
-const authStore = useAuthStore();
-setupInterceptors(authStore);
+	.use(Toast, { maxToasts: 5, newestOnTop: true })
+	.mount("#app");

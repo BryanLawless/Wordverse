@@ -1,13 +1,19 @@
 <template>
-	<div class="container">
-		<div class="container">
-			<h1>404 Not Found</h1>
-			<Button @click="redirect('home')" text="Go Home" size="large" />
-		</div>
+	<div class="container flex flex-col justify-center gap-4 items-center h-screen">
+		<h1 class="font-black leading-none">
+			<span class="heading-effect">Not </span>
+			<span class="heading-effect-other">Found</span>
+		</h1>
+
+		<p class="font-semibold text-center w-2/5">
+			Hmm, we couldn't find what your were looking for, try checking your
+			spelling or practice your spelling in one of our games.
+		</p>
+		<Button @click="redirect('home')" icon="fa-solid fa-house" text="Go Home" size="medium" />
 	</div>
 </template>
 
 <script setup>
-import { redirect } from '@/helpers/Utility';
-import Button from '@/components/Button.vue';
+import { redirect } from "@/helpers/utility";
+import Button from "@/components/Button.vue";
 </script>

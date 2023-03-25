@@ -1,26 +1,40 @@
 {
-  "name": "wordverse-client",
-  "private": true,
-  "version": "1.0.0",
-  "type": "module",
-  "license": "AGPL-3.0",
-  "scripts": {
-    "dev": "vite --host --force",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@vuelidate/core": "^2.0.0",
-    "@vuelidate/validators": "^2.0.0",
-    "@vueuse/core": "^9.7.0",
-    "axios": "^1.2.1",
-    "pinia": "^2.0.28",
-    "socket.io-client": "^4.5.4",
-    "vue": "^3.2.45",
-    "vue-router": "^4.1.6"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-vue": "^4.0.0",
-    "vite": "^4.0.2"
-  }
+	"name": "@wordverse/client",
+	"version": "1.0.1",
+	"type": "module",
+	"author": "TheLawlessDev",
+	"description": "The official Wordverse client.",
+	"license": "AGPL-3.0",
+	"scripts": {
+		"dev": "vite --host",
+		"build": "vite build",
+		"preview": "vite preview",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
+		"prettier": "prettier --check **/../*.{js,vue}",
+		"prettier:fix": "prettier --write ./src/**/*.{js,vue}"
+	},
+	"dependencies": {
+		"axios": "^1.3.4",
+		"moment": "^2.29.4",
+		"peerjs": "^1.4.7",
+		"pinia": "^2.0.33",
+		"socket.io-client": "^4.6.1",
+		"vue": "^3.2.47",
+		"vue-router": "^4.1.6",
+		"vue-toastification": "^2.0.0-rc.5"
+	},
+	"devDependencies": {
+		"@vitejs/plugin-vue": "^4.1.0",
+		"autoprefixer": "^10.4.14",
+		"eslint": "^8.36.0",
+		"eslint-config-prettier": "^8.8.0",
+		"eslint-plugin-import": "^2.27.5",
+		"eslint-plugin-security": "^1.7.1",
+		"eslint-plugin-vue": "^9.9.0",
+		"postcss": "^8.4.21",
+		"prettier": "^2.8.5",
+		"tailwindcss": "^3.2.7",
+		"vite": "^4.2.1"
+	}
 }

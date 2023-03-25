@@ -1,8 +1,7 @@
 <template>
-	<button class="btn">
-		<span class="edge"></span>
-		<span class="front" :class="btnSize"><i v-if="props.icon" :class="props.icon"></i> {{ props.text
-		}}</span>
+	<button class="btn" :class="[btnSize, btnType]">
+		<i v-if="props.icon" :class="props.icon"></i>
+		<span v-if="props.text">{{ " " + props.text }}</span>
 	</button>
 </template>
 
@@ -10,7 +9,7 @@
 const props = defineProps({
 	text: {
 		type: String,
-		required: true
+		required: false
 	},
 	icon: {
 		type: String,
@@ -18,84 +17,82 @@ const props = defineProps({
 	},
 	size: {
 		type: String,
+		required: false
+	},
+	variant: {
+		type: String,
 		required: false,
+		default: "primary"
 	}
 });
 
-var btnSize;
-switch (props.size) {
-	case 'small':
-		btnSize = 'btn-small';
+let btnType;
+switch (props.variant) {
+	case "primary":
+		btnType = "btn-primary";
 		break;
-	case 'large':
-		btnSize = 'btn-large';
+	case "invert":
+		btnType = "btn-invert";
 		break;
 	default:
-		btnSize = 'btn-regular';
+		btnType = "";
+		break;
+}
+
+let btnSize;
+switch (props.size) {
+	case "small":
+		btnSize = "btn-small";
+		break;
+	case "icon":
+		btnSize = "btn-icon";
+		break;
+	case "fit":
+		btnSize = "btn-fit";
 		break;
 }
 </script>
 
 <style lang="css" scoped>
 .btn {
-	position: relative;
-	border: none;
-	background: transparent;
-	padding: 0;
-	cursor: pointer;
-	outline-offset: 4px;
-	transition: filter 250ms;
+	padding: 6px 12px;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 30px;
+	border-radius: 1.5rem;
+	width: 25rem;
+	height: 6rem;
+	transition: 0.1s;
+	text-align: center;
 }
 
-.edge {
-	position: absolute;
-	top: 0;
-	left: 0;
+.btn-primary {
+	color: #7d5afa;
+	background-color: #15141a;
+	border: 0.4rem solid #7d5afa;
+}
+
+.btn-primary:hover {
+	background-color: #7d5afa;
+	color: #15141a;
+}
+
+.btn-invert {
+	color: #15141a;
+	background-color: #7d5afa;
+	border: 0.4rem solid #15141a;
+}
+
+.btn-invert:hover {
+	background-color: #15141a;
+	color: #7d5afa;
+}
+
+.btn-icon {
+	width: 6.5rem;
+}
+
+.btn-fit {
 	width: 100%;
-	height: 100%;
-	border-radius: 1rem;
-	background: #e48f07;
-}
-
-.front {
-	display: block;
-	position: relative;
-	border-radius: 1rem;
-	font-size: 1.25rem;
-	color: #592e2e;
-	background: #fefb75;
-	will-change: transform;
-	transform: translateY(-4px);
-	transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
-}
-
-.btn:hover {
-	filter: brightness(110%);
-}
-
-.btn:hover .front {
-	transform: translateY(-6px);
-	transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
-}
-
-.btn:active .front {
-	transform: translateY(-2px);
-	transition: transform 34ms;
-}
-
-.btn:focus:not(:focus-visible) {
-	outline: none;
-}
-
-.btn-small {
-	padding: 0.75rem 1.25rem;
-}
-
-.btn-regular {
-	padding: 1rem 2.5rem;
-}
-
-.btn-large {
-	padding: 1.5rem 5rem;
 }
 </style>

@@ -1,13 +1,13 @@
 <template>
-	{{ state.time }}
+	<span>{{ state.time }}</span>
 </template>
 
 <script setup>
-import { reactive, onMounted } from 'vue';
-import { getTimeRemaining } from '@/helpers/Utility';
+import { reactive, onMounted } from "vue";
+import { getTimeRemaining } from "@/helpers/utility";
 
 const state = reactive({
-	time: '',
+	time: ""
 });
 
 const props = defineProps({
@@ -20,7 +20,9 @@ const props = defineProps({
 let timeInterval;
 function updateClock() {
 	const timeRemaining = getTimeRemaining(props.timestamp);
-	state.time = `${('0' + timeRemaining.minutes).slice(-2)}:${('0' + timeRemaining.seconds).slice(-2)}`;
+	state.time = `${("0" + timeRemaining.minutes).slice(-2)}:${(
+		"0" + timeRemaining.seconds
+	).slice(-2)}`;
 
 	if (timeRemaining.total <= 0) clearInterval(timeInterval);
 }
@@ -30,7 +32,3 @@ onMounted(() => {
 	timeInterval = setInterval(updateClock, 1000);
 });
 </script>
-
-<style lang="css" scoped>
-
-</style>

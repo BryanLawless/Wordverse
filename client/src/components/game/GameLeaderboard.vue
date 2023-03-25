@@ -1,33 +1,34 @@
 <template>
-	<div class="container">
-		<div class="leaderboard-container box-gradient">
+	<div class="flex flex-col items-center justify-center">
+		<div class="flex flex-col items-center justify-center gap-4 p-8 leaderboard-container">
 			<div class="header">
-				<h3 class="title">Top Players</h3>
+				<h3 class="text-2xl font-black">Top Players</h3>
 			</div>
-			<div v-for="(player, index) in state.leaderboard" :key="index" class="rest">
+			<div v-for="(player, index) in state.leaderboard.slice(0, 5)" :key="index" class="rest">
 				<div class="others flex">
 					<div class="rank">
 						<i v-if="index + 1 == 1" class="fas fa-crown crown"></i>
 						<i v-else class="fas fa-caret-up"></i>
 						<p class="num">{{ index + 1 }}</p>
 					</div>
-					<div class="info flex">
+					<div class="flex items-center justify-between info p-4">
 						<p class="link">{{ player.nickname }}</p>
 						<p class="points">{{ player.score }}</p>
 					</div>
 				</div>
 			</div>
-			<Button text="Back to Games" />
+			<Button @click="redirect('join')" text="Back to Games" icon="fa fa-arrow-left" size="small" />
 		</div>
 	</div>
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router';
-import { onMounted, reactive } from 'vue';
-import Button from '@/components/Button.vue';
+import { useRoute } from "vue-router";
+import { onMounted, reactive } from "vue";
+import Button from "@/components/Button.vue";
 
-import { GameService } from '@/services/Game';
+import { redirect } from "@/helpers/utility";
+import { GameService } from "@/services/game";
 
 const route = useRoute();
 
@@ -37,8 +38,7 @@ const state = reactive({
 
 async function fetchLeaderboard() {
 	let leaderboard = await GameService.getGameLeaderboard(route.params.id);
-	console.log("Leaderboard", leaderboard)
-	if (leaderboard) state.leaderboard = leaderboard;
+	if (leaderboard) state.leaderboard = leaderboard.slice(0, 5);
 }
 
 onMounted(() => fetchLeaderboard());
@@ -46,94 +46,21 @@ onMounted(() => fetchLeaderboard());
 
 <style lang="css" scoped>
 .leaderboard-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	gap: 1rem;
-	padding: 2rem;
 	border-radius: 1rem;
-}
-
-.card .header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 2rem;
-	color: #ddd;
-}
-
-.header .title {
-	font-weight: 300;
-	font-size: 2rem;
-}
-
-.one .sort {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: #fff;
-	font-size: 14.1px;
-}
-
-.one .sort .day {
-	padding: 0.4rem 1.2rem;
-	margin: 0 0.1rem;
-	cursor: pointer;
-}
-
-.one .sort .day.active,
-.one .sort .day:active {
-	background: rgba(210, 255, 213, 0.3);
-	border-radius: 25px;
-}
-
-::selection {
-	background: rgba(210, 255, 213, 0.3);
-}
-
-.photo {
-	width: 75px;
-	background: #fff;
-	border-radius: 50%;
-	border: 5px solid #fefb75;
-	box-shadow: 0 0 20px #fefb75;
-	margin: 1rem 0;
-}
-
-.main {
-	width: 85px;
-}
-
-.rankings {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-top: 1rem;
-	gap: 2rem;
-}
-
-.rankings .player {
-	display: flex;
-	margin: 1rem 0;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-}
-
-.rankings .player.first {
-	z-index: 10;
-	transform: translateY(-10%);
+	background-color: #15141a;
+	border: 0.4rem solid #7d5afa;
 }
 
 .crown {
-	color: gold;
-	filter: drop-shadow(0px 0px 5px gold);
+	color: #fefb75;
+	text-shadow: 0px 0px 2px #fefb75;
+	filter: drop-shadow(0px 0px 5px #fefb75);
 }
 
 .num {
 	color: white;
 	font-size: 1.5rem;
+	font-weight: bold;
 }
 
 .fa-caret-up {
@@ -152,42 +79,20 @@ onMounted(() => fetchLeaderboard());
 .points {
 	color: #fefb75;
 	font-size: 17px;
-}
-
-.second {
-	margin-right: -0.7rem !important;
-}
-
-.third {
-	margin-left: -0.7rem !important;
-}
-
-.p_img {
-	width: 50px;
-	background: #fff;
-	border-radius: 50%;
-}
-
-.flex {
-	display: flex;
-	align-items: center;
+	font-weight: bold;
 }
 
 .others {
 	display: flex;
 	width: 100%;
-	margin-top: 1rem;
 	align-items: center;
 	justify-content: center;
 }
 
 .info {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	min-width: 15rem;
-	border-radius: 30px;
-	background: rgba(210, 213, 255, 0.3);
+	min-width: 20rem;
+	border-radius: 1rem;
+	background: #7d5afa;
 }
 
 .info .points {
