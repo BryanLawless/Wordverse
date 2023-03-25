@@ -184,7 +184,7 @@ onBeforeUnmount(() => {
 	gap: 1rem;
 }
 
-.powerup[data-v-f00c6506] {
+.powerup {
 	display: flex;
 	flex-direction: column;
 	background: #8a69ff;
@@ -216,7 +216,7 @@ onBeforeUnmount(() => {
 	justify-content: center;
 }
 
-.tab-container button[data-v-f00c6506] {
+.tab-container button {
 	height: 2.5rem;
 	border: none;
 	cursor: pointer;

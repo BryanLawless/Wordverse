@@ -28,8 +28,8 @@ const props = defineProps({
 	border-radius: 50%;
 	border: 4px solid #5b41b7;
 	border-top-color: #fefb75;
-	animation: spin-188ecf37 1s ease-in-out infinite;
-	-webkit-animation: spin-188ecf37 1s ease-in-out infinite;
+	animation: spin 1s ease-in-out infinite;
+	-webkit-animation: spin 1s ease-in-out infinite;
 }
 
 @keyframes spin {
