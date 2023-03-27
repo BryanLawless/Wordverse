@@ -1,0 +1,126 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	text-decoration: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	color: #f7f7f7;
+	overflow-x: hidden;
+	background-color: #15141a;
+	font-family: 'Poppins', sans-serif;
+	transition: all ease-in-out .3s;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+	padding: 0;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.heading-effect {
+	font-size: 5rem;
+	color: #7d5afa;
+	text-transform: uppercase;
+	text-shadow: 0 1px 0 #372577, 0 2px 0 #372577,
+		0 3px 0 #372577, 0 4px 0 #372577,
+		0 5px 0 #372577, 0 6px 0 #372577,
+		0 7px 0 #372577, 0 8px 0 #372577,
+		0 9px 0 #372577, 0 10px 0 #372577,
+		0 11px 0 #372577, 0 12px 0 #372577,
+		0 20px 30px rgba(0, 0, 0, 0.5);
+}
+
+.heading-effect-other {
+	font-size: 5rem;
+	color: #fefb75;
+	text-transform: uppercase;
+	text-shadow: 0 1px 0 #e48f07, 0 2px 0 #e48f07,
+		0 3px 0 #e48f07, 0 4px 0 #e48f07,
+		0 5px 0 #e48f07, 0 6px 0 #e48f07,
+		0 7px 0 #e48f07, 0 8px 0 #e48f07,
+		0 9px 0 #e48f07, 0 10px 0 #e48f07,
+		0 11px 0 #e48f07, 0 12px 0 #e48f07,
+		0 20px 30px rgba(0, 0, 0, 0.5);
+}
+
+a {
+	color: #7d5afa;
+	text-decoration: none;
+	cursor: pointer;
+	background: transparent;
+}
+
+.label-block {
+	display: inline-block;
+	background-color: red;
+	width: 120px;
+	height: 120px;
+	padding: 5px 10px;
+}
+
+.radio:checked+.label-block {
+	background-color: blue;
+}
+
+.input-field {
+	font-family: inherit;
+	font-size: 1.875rem;
+	font-weight: 800;
+	width: 100%;
+	padding: 12px 25px;
+	outline: none;
+	border-radius: 1rem;
+	color: #7d5afa;
+	background-color: #15141a;
+	border: 0.4rem solid #7d5afa;
+	transition: 0.1s;
+}
+
+.input-field::placeholder {
+	color: #7d5afab7;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.input-control {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 1.25rem;
+}
+
+.box-gradient {
+	box-shadow: 0 0 50px 15px #8052e8;
+	background: linear-gradient(180deg, #b97bfd, #906afb);
+}
+
+.value-graphic {
+	max-height: 1.5rem;
+	max-width: 1.5rem;
+}
+
+.invisible-scrollbar::-webkit-scrollbar {
+	display: none;
+}
