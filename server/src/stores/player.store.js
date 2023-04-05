@@ -17,7 +17,7 @@ class PlayerStore {
 			game_id: gameId,
 			answer: "",
 			score: 0,
-			coins: 0,
+			coins: 1000,
 			effects: []
 		};
 
@@ -42,9 +42,9 @@ class PlayerStore {
 	 * @returns {Any} The value of the key
 	 */
 	get(playerSocket, key) {
-		let player = this.findByIndex(playerSocket);
+		let player = this.find(playerSocket);
 
-		return this.players[player] ? this.players[player][key] : false;
+		return player.index >= 0 ? player.player[key] : false;
 	}
 
 	/**

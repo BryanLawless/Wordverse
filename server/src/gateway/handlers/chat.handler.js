@@ -1,6 +1,6 @@
 const Events = require("../events");
 const Core = require("../common/core");
-const Config = require("../../config/Config");
+const Config = require("../../config/config");
 const Validation = require("../../helpers/validate");
 const GameStore = require("../../stores/game.store");
 const PlayerStore = require("../../stores/player.store");

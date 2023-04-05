@@ -1,4 +1,4 @@
-const config = require("../config/Config");
+const config = require("../config/config");
 const socketRoutes = require("./router/general.routes");
 
 /**

@@ -1,5 +1,5 @@
 const express = require("express");
-const GeneralController = require("../controllers/General.controller");
+const GeneralController = require("../controllers/general.controller");
 
 /* Access router instance */
 const router = express.Router();

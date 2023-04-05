@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const config = require("../config/Config");
+const config = require("../config/config");
 
 mongoose.connection.on("connected", () => {
 	console.log("🟢 - MongoDB connection established.");

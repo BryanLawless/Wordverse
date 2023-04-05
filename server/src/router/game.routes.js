@@ -1,5 +1,5 @@
 const express = require("express");
-const GameController = require("../controllers/Game.controller");
+const GameController = require("../controllers/game.controller");
 
 /* Access router instance */
 const router = express.Router();
