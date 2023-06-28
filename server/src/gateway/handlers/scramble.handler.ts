@@ -78,7 +78,7 @@ export default class ScrambleHandler {
 		this.hostSocket = hostSocket;
 
 		/* Duration of the game in seconds */
-		this.time = 300;
+		this.time = 120;
 
 		/* Events that this specific game will listen for */
 		this.events = {
