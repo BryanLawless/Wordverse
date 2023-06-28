@@ -21,7 +21,7 @@ class PlayerStore {
 			game_id: gameId,
 			answer: '',
 			score: 0,
-			coins: 0,
+			coins: 999,
 			effects: [],
 			turn: false,
 			choosing: false,
