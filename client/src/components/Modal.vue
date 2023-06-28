@@ -1,28 +1,48 @@
 <template>
 	<transition name="fade" appear>
-		<div class="modal-overlay" v-if="props.show" @click="emit('close')"></div>
+		<div
+			class="modal-overlay"
+			v-if="props.show"
+			@click="clickOutsideClose"></div>
 	</transition>
 	<transition name="pop" appear>
 		<div class="modal" role="dialog" v-if="props.show">
 			<slot name="heading"></slot>
 			<slot name="content"></slot>
 
-			<Button @click="emit('close')" class="mt-5" text="Close" variant="invert" />
+			<Button
+				v-if="showClose"
+				@click="emit('close')"
+				class="mt-5"
+				text="Close"
+				variant="invert" />
 		</div>
 	</transition>
 </template>
 
-<script setup>
-import Button from "@/components/Button.vue";
+<script lang="ts" setup>
+import Button from '@/components/Button.vue';
 
-const emit = defineEmits(["close"]);
+const emit = defineEmits(['close']);
 
 const props = defineProps({
 	show: {
 		type: Boolean,
 		required: true
+	},
+	showClose: {
+		type: Boolean,
+		default: true
+	},
+	clickOutsideClose: {
+		type: Boolean,
+		default: true
 	}
 });
+
+function clickOutsideClose() {
+	if (props.clickOutsideClose) emit('close');
+}
 </script>
 
 <style lang="css" scoped>
@@ -61,7 +81,7 @@ const props = defineProps({
 
 .fade-enter-active,
 .fade-leave-active {
-	transition: opacity .4s linear;
+	transition: opacity 0.4s linear;
 }
 
 .fade-enter,

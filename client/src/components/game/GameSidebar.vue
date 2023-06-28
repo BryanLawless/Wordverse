@@ -3,22 +3,37 @@
 		<div class="inner-container">
 			<div class="game-value-container">
 				<div class="game-timer">
-					<GameTimer v-if="state.timestamp.length > 0" :timestamp="state.timestamp" />
+					<GameTimer
+						v-if="state.timestamp.length > 0"
+						:timestamp="state.timestamp" />
 				</div>
-				<div class="game-value-score">
+				<div v-if="props.showScore" class="game-value-score">
 					<img src="@/assets/images/medal.png" class="value-graphic" />
 					<span>{{ state.score }}</span>
 				</div>
-				<div class="game-value-coins">
+				<div v-if="props.showCoins" class="game-value-coins">
 					<img src="@/assets/images/coin.png" class="value-graphic" />
 					<span>{{ state.coins }}</span>
 				</div>
 			</div>
 			<div class="tab-container">
-				<button @click="openTab($event, 'powerups')" class="tablinks active">Powerups</button>
-				<button @click="openTab($event, 'chat')" class="tablinks">Chat & Voice</button>
+				<button
+					v-if="props.showPowerups"
+					@click="openTab($event, 'powerups')"
+					class="tablinks active">
+					Powerups
+				</button>
+				<button
+					@click="openTab($event, 'chat')"
+					class="tablinks"
+					:class="props.showPowerups == false ? 'active' : ''">
+					Chat & Voice
+				</button>
 			</div>
-			<div class="tab-content invisible-scrollbar" id="powerups" style="display:block">
+			<div
+				class="tab-content invisible-scrollbar"
+				id="powerups"
+				:style="props.showPowerups ? 'display: block' : 'display: none'">
 				<div class="game-powerup-container">
 					<div class="powerup">
 						<h3 class="leading-none text-xl font-semibold">Re-Scramble</h3>
@@ -65,65 +80,99 @@
 					</div>
 				</div>
 			</div>
-			<div class="tab-content invisible-scrollbar" id="chat" style="display:none">
+			<div
+				class="tab-content invisible-scrollbar"
+				id="chat"
+				:style="
+					props.showPowerups == false ? 'display: block' : 'display: none'
+				">
 				<div class="flex flex-col gap-1">
 					<GameChat />
-					<Button @click="emit('joinVoice')" text="Join Voice" icon="fa-solid fa-microphone" variant="invert"
+					<Button
+						@click="emit('joinVoice')"
+						text="Join Voice"
+						icon="fa-solid fa-microphone"
+						variant="invert"
 						size="fit" />
-					<Button @click="emit('leaveVoice')" text="Leave Voice" icon="fa-solid fa-microphone-slash"
-						variant="invert" size="fit" />
+					<Button
+						@click="emit('leaveVoice')"
+						text="Leave Voice"
+						icon="fa-solid fa-microphone-slash"
+						variant="invert"
+						size="fit" />
 				</div>
 			</div>
 		</div>
 	</aside>
 </template>
 
-<script setup>
-import { reactive, onBeforeUnmount } from "vue";
-import Button from "@/components/Button.vue";
-import GameTimer from "./GameTimer.vue";
-import GameChat from "./GameChat.vue";
+<script lang="ts" setup>
+import { reactive, onBeforeUnmount } from 'vue';
+import Button from '@/components/Button.vue';
+import GameTimer from './GameTimer.vue';
+import GameChat from './GameChat.vue';
 
-import ws from "@/gateway/websocket";
+import ws from '@/gateway/websocket';
 
-const emit = defineEmits(["joinVoice", "leaveVoice"]);
+const emit = defineEmits(['joinVoice', 'leaveVoice']);
 
 const state = reactive({
-	timestamp: "",
+	timestamp: '',
 	score: 0,
 	coins: 0
 });
 
-function usePowerup(powerup) {
-	ws.emit("USE_POWERUP", {
+const props = defineProps({
+	showCoins: {
+		type: Boolean,
+		default: true
+	},
+	showScore: {
+		type: Boolean,
+		default: true
+	},
+	showStatus: {
+		type: Boolean,
+		default: true
+	},
+	showPowerups: {
+		type: Boolean,
+		default: true
+	}
+});
+
+function usePowerup(powerup: string) {
+	ws.emit('USE_POWERUP', {
 		powerup: powerup
 	});
 }
 
-function openTab(evt, tabName) {
-	var i, tabContent, tabLinks;
-	tabContent = document.getElementsByClassName("tab-content");
-	for (i = 0; i < tabContent.length; i++) {
-		tabContent[i].style.display = "none";
+function openTab(e: Event, tabName: string) {
+	let tabContent, tabLinks;
+	tabContent = document.getElementsByClassName('tab-content');
+	for (let i = 0; i < tabContent.length; i++) {
+		let t = tabContent[i] as any;
+		t.style.display = 'none';
 	}
 
-	tabLinks = document.getElementsByClassName("tablinks");
-	for (i = 0; i < tabLinks.length; i++) {
-		tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+	tabLinks = document.getElementsByClassName('tablinks');
+	for (let i = 0; i < tabLinks.length; i++) {
+		tabLinks[i].className = tabLinks[i].className.replace(' active', '');
 	}
 
-	document.getElementById(tabName).style.display = "block";
-	evt.currentTarget.className += " active";
+	document.getElementById(tabName)!.style.display = 'block';
+	let evt = e.currentTarget as any;
+	evt.className += ' active';
 }
 
-ws.on("UPDATE_SCORE", (score) => (state.score = score));
-ws.on("UPDATE_COINS", (coins) => (state.coins = coins));
-ws.on("GAME_TIMER_SET", (time) => (state.timestamp = time));
+ws.on('UPDATE_SCORE', (score) => (state.score = score));
+ws.on('UPDATE_COINS', (coins) => (state.coins = coins));
+ws.on('SET_TIMER', (time) => (state.timestamp = time));
 
 onBeforeUnmount(() => {
-	ws.off("UPDATE_SCORE");
-	ws.off("UPDATE_COINS");
-	ws.off("GAME_TIMER_SET");
+	ws.off('UPDATE_SCORE');
+	ws.off('UPDATE_COINS');
+	ws.off('SET_TIMER');
 });
 </script>
 
@@ -220,7 +269,7 @@ onBeforeUnmount(() => {
 	height: 2.5rem;
 	border: none;
 	cursor: pointer;
-	transition: .3s;
+	transition: 0.3s;
 	font-size: 17px;
 	margin: 4px;
 	border-radius: 1rem;
@@ -242,6 +291,6 @@ onBeforeUnmount(() => {
 	color: #ddd;
 	height: 100%;
 	overflow: hidden;
-	overflow-y: scroll
+	overflow-y: scroll;
 }
 </style>

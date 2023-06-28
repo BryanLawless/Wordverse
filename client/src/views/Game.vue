@@ -1,49 +1,48 @@
 <template>
-	<GameNickname v-if="state.gameStatus == 'getNickname'" :gameId="route.params.id" @joined="changeScreen('gameLobby')" />
+	<GameNickname v-if="state.gameStatus == 'getNickname'" :gameId="(route.params.id as string)"
+		@joined="changeScreen('gameLobby')" />
 	<GameLobby v-if="state.gameStatus == 'gameLobby'" @gameStarting="startGame" />
-	<GamePlayable v-if="state.gameStatus == 'gamePlaying'" @joinVoice="joinVoice" @leaveVoice="properVoiceDisconnect"
-		@gameOver="changeScreen('gameOver')" />
-	<GameLeaderboard v-if="state.gameStatus == 'gameOver'" />
+	<PlayArea v-if="state.gameStatus == 'playArea'" :gameMode="state.gameMode" @joinVoice="joinVoice"
+		@leaveVoice="properVoiceDisconnect" @gameOver="changeScreen('gameOver')" />
+	<GameLeaderboard v-if="state.gameStatus == 'gameOver'" @backToLobby="changeScreen('gameLobby')" />
 </template>
 
-<script setup>
-import { onBeforeMount, onBeforeUnmount, reactive } from "vue";
-import GameNickname from "@/components/game/GameNickname.vue";
-import GameLobby from "@/components/game/GameLobby.vue";
-import GamePlayable from "@/components/game/GamePlayable.vue";
-import GameLeaderboard from "@/components/game/GameLeaderboard.vue";
+<script lang="ts" setup>
+import { onBeforeMount, onBeforeUnmount, reactive } from 'vue';
+import GameNickname from '@/components/game/GameNickname.vue';
+import GameLobby from '@/components/game/GameLobby.vue';
+import GameLeaderboard from '@/components/game/GameLeaderboard.vue';
+import PlayArea from '@/components/game/PlayArea.vue';
 
-import Peer from "peerjs";
-import ws from "@/gateway/websocket";
-import { useRoute } from "vue-router";
-import { log } from "@/helpers/logger";
-import { getAudio } from "@/helpers/utility";
-import { GameService } from "@/services/game";
-import { setupIceServer } from "@/gateway/ice";
-import gameMusic from "@/assets/audio/game.mp3";
-import { useDesignStore } from "@/stores/design.store";
-import { redirect, audioEffectFadeIn, stopStreams } from "@/helpers/utility";
+import Peer, { MediaConnection } from 'peerjs';
+import ws from '@/gateway/websocket';
+import { useRoute } from 'vue-router';
+import { log } from '@/helpers/logger';
+import { getAudio } from '@/helpers/utility';
+import { GameService } from '@/services/game';
+import { setupIceServer } from '@/gateway/ice';
+import { useDesignStore } from '@/stores/design.store';
+import { redirect, stopStreams } from '@/helpers/utility';
 
 const designStore = useDesignStore();
 const route = useRoute();
 
-let peer;
+let peer: Peer;
 const state = reactive({
-	gameStatus: "getNickname",
+	gameMode: '',
+	gameStatus: 'getNickname',
 	localStream: null,
 	receivedCalls: [],
-	playersInVoice: [],
-	peers: []
+	playersInVoice: [] as string[],
+	peers: [] as MediaConnection[]
 });
 
-var audio = new Audio(gameMusic);
-
-function changeScreen(screen) {
+function changeScreen(screen: string): void {
 	switch (screen) {
-		case "gamePlaying":
+		case 'playArea':
 			designStore.showBanner = false;
 			break;
-		case "gameOver":
+		case 'gameOver':
 			designStore.showBanner = true;
 			break;
 	}
@@ -51,34 +50,23 @@ function changeScreen(screen) {
 	state.gameStatus = screen;
 }
 
-function playMusic() {
-	audio.loop = true;
-	audio.play();
-	audioEffectFadeIn(audio);
-}
-
-function stopMusic() {
-	audio.pause();
-	audio.src = audio.src;
-}
-
-function startGame() {
-	changeScreen("gamePlaying");
-	playMusic();
+function startGame(mode: string) {
+	state.gameMode = mode;
+	changeScreen('playArea');
 }
 
 function joinVoice() {
-	ws.emit("JOIN_VOICE");
+	ws.emit('JOIN_VOICE');
 }
 
 function leaveVoice() {
-	ws.emit("LEAVE_VOICE");
+	ws.emit('LEAVE_VOICE');
 }
 
-function receiveAudioStream(stream) {
-	const audio = document.createElement("audio");
+function receiveAudioStream(stream: MediaStream) {
+	const audio = document.createElement('audio');
 	audio.srcObject = stream;
-	audio.addEventListener("loadedmetadata", () => audio.play());
+	audio.addEventListener('loadedmetadata', () => audio.play());
 }
 
 function properVoiceDisconnect() {
@@ -92,44 +80,44 @@ function properVoiceDisconnect() {
 		state.localStream = null;
 
 		if (state.peers) {
-			state.peers.forEach((p) => p.close());
+			state.peers.forEach((p: any) => p.close());
 			state.peers = [];
 		}
 	}
 }
 
-ws.on("PLAYERS_IN_VOICE", (data) => {
+ws.on('PLAYERS_IN_VOICE', (data) => {
 	state.playersInVoice = data;
 });
 
-ws.on("ADDING_TO_VOICE", (user) => {
+ws.on('ADDING_TO_VOICE', (user) => {
 	state.playersInVoice.push(user);
 });
 
-ws.on("REMOVING_FROM_VOICE", (user) => {
+ws.on('REMOVING_FROM_VOICE', (user) => {
 	state.playersInVoice = state.playersInVoice.filter((id) => id !== user);
 });
 
-ws.on("VOICE_TOKEN", (data) => {
+ws.on('VOICE_TOKEN', (data) => {
 	let peerPayload = setupIceServer(data);
 
 	getAudio()
-		.then((localStream) => {
+		.then((localStream: MediaStream | null) => {
 			state.localStream = localStream;
 
 			peer = new Peer(ws.id, peerPayload);
 
-			peer.on("call", (call) => {
-				log("info", "Received call")
+			peer.on('call', (call) => {
+				log('info', 'Received call');
 				call.answer(state.localStream);
-				call.on("stream", (stream) => {
+				call.on('stream', (stream) => {
 					receiveAudioStream(stream);
 					state.receivedCalls.push(stream);
 				});
 			});
 
-			peer.on("open", () => {
-				log("success", "Connected to peer server")
+			peer.on('open', () => {
+				log('success', 'Connected to peer server');
 
 				let otherPlayersInVoice = state.playersInVoice.filter(
 					(id) => id !== ws.id
@@ -137,49 +125,48 @@ ws.on("VOICE_TOKEN", (data) => {
 
 				state.peers = otherPlayersInVoice.map((id) => {
 					var mediaConnection = peer.call(id, state.localStream);
-					log("info", `Calling ${id}`);
+					log('info', `Calling ${id}`);
 
-					const audio = document.createElement("audio");
-					mediaConnection.on("stream", (stream) => {
-						log("info", `${id} answered call`);
+					const audio = document.createElement('audio');
+					mediaConnection.on('stream', (stream) => {
+						log('info', `${id} answered call`);
 						audio.srcObject = stream;
-						audio.addEventListener("loadedmetadata", () => {
+						audio.addEventListener('loadedmetadata', () => {
 							audio.play();
 						});
 					});
 
-					mediaConnection.on("close", () => audio.remove());
+					mediaConnection.on('close', () => audio.remove());
 
 					return mediaConnection;
 				});
 			});
 		})
 		.catch((error) => {
-			log("error", `Error while fetching audio: ${error}`)
+			log('error', `Error while fetching audio: ${error}`);
 		});
 });
 
 onBeforeMount(async () => {
 	let game = await GameService.getGame(route.params.id);
-	if (!game) redirect("404");
+	if (!game) redirect('404');
 });
 
-ws.on("GAME_NOT_FOUND", () => redirect("404"));
-ws.on("HOST_DISCONNECT", () => redirect("join"));
+ws.on('GAME_NOT_FOUND', () => redirect('404'));
+ws.on('HOST_DISCONNECT', () => redirect('join'));
 
 onBeforeUnmount(() => {
 	properVoiceDisconnect();
 
-	ws.emit("PLAYER_LEAVE");
-	stopMusic();
+	ws.emit('PLAYER_LEAVE');
 
 	designStore.showBanner = true;
 
-	ws.off("GAME_NOT_FOUND");
-	ws.off("HOST_DISCONNECT");
-	ws.off("PLAYERS_IN_VOICE");
-	ws.off("ADDING_TO_VOICE");
-	ws.off("REMOVING_FROM_VOICE");
-	ws.off("VOICE_TOKEN");
+	ws.off('GAME_NOT_FOUND');
+	ws.off('HOST_DISCONNECT');
+	ws.off('PLAYERS_IN_VOICE');
+	ws.off('ADDING_TO_VOICE');
+	ws.off('REMOVING_FROM_VOICE');
+	ws.off('VOICE_TOKEN');
 });
 </script>

@@ -1,0 +1,59 @@
+export const GET_READY = 'GET_READY';
+export const GAME_OVER = 'GAME_OVER';
+export const GAME_FULL = 'GAME_FULL';
+export const START_GAME = 'START_GAME';
+export const CREATE_GAME = 'CREATE_GAME';
+export const GAME_CREATED = 'GAME_CREATED';
+export const GAME_REMOVED = 'GAME_REMOVED';
+export const GAME_STARTING = 'GAME_STARTING';
+export const NOT_GAME_HOST = 'NOT_GAME_HOST';
+export const GAME_NOT_FOUND = 'GAME_NOT_FOUND';
+export const INVALID_GAME_MODE = 'INVALID_GAME_MODE';
+export const NOT_ENOUGH_PLAYERS = 'NOT_ENOUGH_PLAYERS';
+
+export const SET_TIMER = 'SET_TIMER';
+export const NEW_LETTERS = 'NEW_LETTERS';
+export const CHECK_GUESS = 'CHECK_GUESS';
+export const USE_POWERUP = 'USE_POWERUP';
+
+export const ROUND = 'ROUND';
+export const DRAW_LINE = 'DRAW_LINE';
+export const EMIT_DRAWING = 'EMIT_DRAWING';
+export const CLEAR_CANVAS = 'CLEAR_CANVAS';
+export const UNDO_LINE = 'UNDO_LINE';
+export const YOUR_TURN = 'YOUR_TURN';
+export const END_TURN = 'END_TURN';
+export const CHOOSE_WORD = 'CHOOSE_WORD';
+export const WORD_CHOSEN = 'WORD_CHOSEN';
+export const CORRECT_WORD = 'CORRECT_WORD';
+export const GUESS_DRAWING = 'GUESS_DRAWING';
+export const TURN_ROTATION = 'TURN_ROTATION';
+export const PLAYER_CHOOSING_WORD = 'PLAYER_CHOOSING_WORD';
+export const POSSIBLE_DRAWING_OPTIONS = 'POSSIBLE_DRAWING_OPTIONS';
+
+export const UPDATE_COINS = 'UPDATE_COINS';
+export const UPDATE_SCORE = 'UPDATE_SCORE';
+export const POWERUP_USED = 'POWERUP_USED';
+
+export const CORRECT_GUESS = 'CORRECT_GUESS';
+export const INCORRECT_GUESS = 'INCORRECT_GUESS';
+export const POWERUP_RECEIVED = 'POWERUP_RECEIVED';
+export const POWERUP_EFFECT_CLEARED = 'POWERUP_EFFECT_CLEARED';
+export const HOST_DISCONNECT = 'HOST_DISCONNECT';
+
+export const PLAYER_JOIN = 'PLAYER_JOIN';
+export const PLAYER_LEAVE = 'PLAYER_LEAVE';
+export const UPDATE_PLAYER_LIST = 'UPDATE_PLAYER_LIST';
+export const PLAYER_JOIN_SUCCESS = 'PLAYER_JOIN_SUCCESS';
+
+export const SEND_MESSAGE = 'SEND_MESSAGE';
+export const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
+export const JOIN_VOICE = 'JOIN_VOICE';
+export const LEAVE_VOICE = 'LEAVE_VOICE';
+export const VOICE_TOKEN = 'VOICE_TOKEN';
+export const ADDING_TO_VOICE = 'ADDING_TO_VOICE';
+export const REMOVING_FROM_VOICE = 'REMOVING_FROM_VOICE';
+export const PLAYERS_IN_VOICE = 'PLAYERS_IN_VOICE';
+
+export const DISCONNECT = 'DISCONNECT';
+export const ERROR_OCCURRED = 'ERROR_OCCURRED';
