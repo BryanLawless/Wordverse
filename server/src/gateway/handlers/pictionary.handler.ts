@@ -61,7 +61,7 @@ export default class PictionaryHandler {
 		this.pickWordTime = 10;
 
 		/* The amount of rounds to play, once all players have had a turn, it is a round */
-		this.rounds = 5;
+		this.rounds = 1;
 
 		/* The current round of the game */
 		this.currentRound = 1;
