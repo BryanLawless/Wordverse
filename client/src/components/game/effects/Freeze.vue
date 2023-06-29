@@ -2,8 +2,6 @@
 	<div class="freeze-container"></div>
 </template>
 
-<script setup></script>
-
 <style lang="css" scoped>
 .freeze-container {
 	position: fixed;

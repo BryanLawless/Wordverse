@@ -5,7 +5,7 @@
   	<h2 align="center">Wordverse</h2>
 	<h3>FBLA Game Development 2022-2023</h3>
   	<p align="center">
-    	A competitive multiplayer word game. By Bryan Lawless & Jack Houchin.
+    	By Bryan Lawless & Jack Houchin.
     	<br />
 		<br />
     	<a href="https://wordverse.vercel.app/">View Demo</a>
@@ -20,9 +20,11 @@
 
 ## 📜 About the Project
 
-![Wordverse](./wordverse.png?raw=true "Wordverse Home")
+The Wordverse is a multiplayer word game platform where players can compete against each other in a variety of different game modes, such as word scramble and pictionary. All the game modes get progressively more difficult as the player gets more points. Players are able to communicate with one another using the built-in text and voice chat system.
 
-Wordverse is a multiplayer platform where players can create and join rooms to play a variety of competitive word games. We chose to use web technologies instead of platforms like Unity or other game frameworks. This allows people to play the game without any required download. It also opens the door for cross platform mobile and desktop applications down the road.
+---
+
+![Wordverse](./wordverse.png?raw=true "Wordverse Home")
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -49,17 +51,18 @@ Our project meets the following requirements from the guidelines stated here: [F
 
 ## 🧰 Core Technologies Used
 
-| Technology                                                                                                                   | Description                               | Link                     |
-| ---------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | ------------------------ |
-| ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)                      | Runtime environment for JavaScript        | https://nodejs.org/en/   |
-| ![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)            | Frontend JavaScript framework.            | https://vuejs.org/       |
-| ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)                       | Frontend module and asset bundler.        | https://vitejs.dev/      |
-| ![Socket.io](https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101)              | Library for bi-directional communication. | https://socket.io/       |
-| ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)              | Database and storage solution.            | https://www.mongodb.com/ |
-| ![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)                 | Hosting for backend codebase.             | https://www.heroku.com/  |
-| ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)                 | Hosting for frontend codebase.            | https://vercel.com/      |
-| ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) | Frontend CSS framework.                   | https://tailwindcss.com/ |
-| ![Twilio](https://img.shields.io/badge/Twilio-F22F46?style=for-the-badge&logo=Twilio&logoColor=white)                        | STUN/TURN servers for voice calling.      | https://www.twilio.com/  |
+| Technology                                                                                                                   | Description                               | Link                            |
+| ---------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | ------------------------------- |
+| ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)                      | Runtime environment for JavaScript        | https://nodejs.org/en/          |
+| ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)     | Static typing for JavaScript              | https://www.typescriptlang.org/ |
+| ![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)            | Frontend JavaScript framework.            | https://vuejs.org/              |
+| ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)                       | Frontend module and asset bundler.        | https://vitejs.dev/             |
+| ![Socket.io](https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101)              | Library for bi-directional communication. | https://socket.io/              |
+| ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)              | Database and storage solution.            | https://www.mongodb.com/        |
+| ![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)                 | Hosting for backend codebase.             | https://www.heroku.com/         |
+| ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)                 | Hosting for frontend codebase.            | https://vercel.com/             |
+| ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) | Frontend CSS framework.                   | https://tailwindcss.com/        |
+| ![Twilio](https://img.shields.io/badge/Twilio-F22F46?style=for-the-badge&logo=Twilio&logoColor=white)                        | STUN/TURN servers for voice calling.      | https://www.twilio.com/         |
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -71,6 +74,7 @@ Our project meets the following requirements from the guidelines stated here: [F
 
 - NodeJS 16+
 - A MongoDB Account
+- A Twilio Account
 
 1. Clone the repo `git clone https://github.com/TheLawlessDev/Wordverse.git`
 2. Open a terminal in the cloned folder.
@@ -153,9 +157,10 @@ This project has a lot of moving parts, the core inner-workings are explained be
 - [x] Peer-to-peer voice chat.
 - [x] Design improvements.
 - [ ] Improve responsiveness.
-- [ ] Different game-modes.
+- [x] Different game-modes.
 - [x] Improve in-memory stores.
 - [x] General code cleanup and improvements.
+- [x] Switch to TypeScript.
 
 See the [open issues](https://github.com/TheLawlessDev/Wordverse/issues) for a full list of proposed features as well as known issues.
 
@@ -165,7 +170,7 @@ See the [open issues](https://github.com/TheLawlessDev/Wordverse/issues) for a f
 
 ## 📜 License
 
-Distributed under the GNU Affero General Public License v3.0. See `LICENSE` or https://choosealicense.com/licenses/agpl-3.0/ for more information.
+Distributed under the GNU Affero General Public License v3.0. See `LICENSE` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

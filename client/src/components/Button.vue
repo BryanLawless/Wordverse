@@ -1,11 +1,11 @@
 <template>
 	<button class="btn" :class="[btnSize, btnType]">
 		<i v-if="props.icon" :class="props.icon"></i>
-		<span v-if="props.text">{{ " " + props.text }}</span>
+		<span v-if="props.text">{{ ' ' + props.text }}</span>
 	</button>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 const props = defineProps({
 	text: {
 		type: String,
@@ -22,33 +22,33 @@ const props = defineProps({
 	variant: {
 		type: String,
 		required: false,
-		default: "primary"
+		default: 'primary'
 	}
 });
 
 let btnType;
 switch (props.variant) {
-	case "primary":
-		btnType = "btn-primary";
+	case 'primary':
+		btnType = 'btn-primary';
 		break;
-	case "invert":
-		btnType = "btn-invert";
+	case 'invert':
+		btnType = 'btn-invert';
 		break;
 	default:
-		btnType = "";
+		btnType = '';
 		break;
 }
 
 let btnSize;
 switch (props.size) {
-	case "small":
-		btnSize = "btn-small";
+	case 'small':
+		btnSize = 'btn-small';
 		break;
-	case "icon":
-		btnSize = "btn-icon";
+	case 'icon':
+		btnSize = 'btn-icon';
 		break;
-	case "fit":
-		btnSize = "btn-fit";
+	case 'fit':
+		btnSize = 'btn-fit';
 		break;
 }
 </script>
@@ -89,6 +89,7 @@ switch (props.size) {
 }
 
 .btn-icon {
+	height: 5.5rem;
 	width: 6.5rem;
 }
 

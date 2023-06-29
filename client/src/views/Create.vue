@@ -16,26 +16,26 @@
 	</div>
 </template>
 
-<script setup>
-import { reactive } from "vue";
-import Button from "@/components/Button.vue";
+<script lang="ts" setup>
+import { reactive } from 'vue';
+import Button from '@/components/Button.vue';
 
-import ws from "@/gateway/websocket";
-import { redirect } from "@/helpers/utility";
+import ws from '@/gateway/websocket';
+import { redirect } from '@/helpers/utility';
 
 const state = reactive({
-	gameName: "",
+	gameName: '',
 	playersAllowed: 2
 });
 
 function createGame() {
-	ws.emit("CREATE_GAME", {
+	ws.emit('CREATE_GAME', {
 		game_name: state.gameName,
 		players_allowed: state.playersAllowed
 	});
 
-	ws.on("GAME_CREATED", (data) => {
-		redirect("game", { id: data.game_id });
+	ws.on('GAME_CREATED', (data) => {
+		redirect('game', { id: data.game_id });
 	});
 }
 </script>

@@ -124,3 +124,38 @@ a {
 .invisible-scrollbar::-webkit-scrollbar {
 	display: none;
 }
+
+tab-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.tab-container button {
+	height: 2.5rem;
+	border: none;
+	cursor: pointer;
+	transition: 0.3s;
+	font-size: 17px;
+	margin: 4px;
+	border-radius: 1rem;
+	padding: 6px 18px;
+	font-weight: semibold;
+	background-color: #5f4bc1;
+}
+
+.tab-container button.active {
+	background-color: #fff;
+	color: #15141a;
+}
+
+.tab-content {
+	display: none;
+	padding: 6px 12px;
+	border-top: none;
+	background-color: transparent;
+	color: #ddd;
+	height: 100%;
+	overflow: hidden;
+	overflow-y: scroll;
+}

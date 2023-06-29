@@ -17,28 +17,32 @@
 					</div>
 				</div>
 			</div>
-			<Button @click="redirect('join')" text="Back to Games" icon="fa fa-arrow-left" size="small" />
+			<Button @click="redirect('join')" text="Back to Lobby" icon="fa fa-arrow-left" size="small" />
 		</div>
 	</div>
 </template>
 
-<script setup>
-import { useRoute } from "vue-router";
-import { onMounted, reactive } from "vue";
-import Button from "@/components/Button.vue";
+<script lang="ts" setup>
+import { useRoute } from 'vue-router';
+import { onMounted, reactive } from 'vue';
+import Button from '@/components/Button.vue';
 
-import { redirect } from "@/helpers/utility";
-import { GameService } from "@/services/game";
+import { redirect } from '@/helpers/utility';
+import { GameService } from '@/services/game';
+import { LeaderboardPlayer } from '@/types/game.types';
 
 const route = useRoute();
 
 const state = reactive({
-	leaderboard: []
+	leaderboard: [] as LeaderboardPlayer[]
 });
 
 async function fetchLeaderboard() {
 	let leaderboard = await GameService.getGameLeaderboard(route.params.id);
-	if (leaderboard) state.leaderboard = leaderboard.slice(0, 5);
+
+	let l = leaderboard as any;
+
+	if (l.length > 0) state.leaderboard = l.slice(0, 5);
 }
 
 onMounted(() => fetchLeaderboard());

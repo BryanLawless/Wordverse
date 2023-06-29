@@ -5,11 +5,11 @@
 	</div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 const props = defineProps({
 	text: {
 		type: String,
-		default: "Loading..."
+		default: 'Loading...'
 	}
 });
 </script>
