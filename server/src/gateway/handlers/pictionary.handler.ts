@@ -61,7 +61,7 @@ export default class PictionaryHandler {
 		this.pickWordTime = 10;
 
 		/* The amount of rounds to play, once all players have had a turn, it is a round */
-		this.rounds = 5;
+		this.rounds = 1;
 
 		/* The current round of the game */
 		this.currentRound = 1;
@@ -209,7 +209,7 @@ export default class PictionaryHandler {
 			if (!proceed) return;
 
 			/* Broadcast to all players that the turn has ended, show the correct word */
-			this.io.to(this.gameId).emit(CORRECT_WORD, this.drawingWord);
+			// this.io.to(this.gameId).emit(CORRECT_WORD, this.drawingWord);
 
 			/* End the turn for the player */
 			PlayerStore.toggleTurn(nextPlayer.player_socket);
@@ -220,6 +220,7 @@ export default class PictionaryHandler {
 
 			/* Reset the drawing word */
 			this.drawingWord = '';
+			this.threeWords = [];
 
 			/* Clear the canvas */
 			this.clearCanvasHandler(

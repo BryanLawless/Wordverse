@@ -3,9 +3,7 @@
 		<div class="inner-container">
 			<div class="game-value-container">
 				<div class="game-timer">
-					<GameTimer
-						v-if="state.timestamp.length > 0"
-						:timestamp="state.timestamp" />
+					<GameTimer v-if="state.timestamp.length > 0" :timestamp="state.timestamp" />
 				</div>
 				<div v-if="props.showScore" class="game-value-score">
 					<img src="@/assets/images/medal.png" class="value-graphic" />
@@ -17,22 +15,15 @@
 				</div>
 			</div>
 			<div class="tab-container">
-				<button
-					v-if="props.showPowerups"
-					@click="openTab($event, 'powerups')"
-					class="tablinks active">
+				<button v-if="props.showPowerups" @click="openTab($event, 'powerups')" class="tablinks active">
 					Powerups
 				</button>
-				<button
-					@click="openTab($event, 'chat')"
-					class="tablinks"
+				<button @click="openTab($event, 'chat')" class="tablinks"
 					:class="props.showPowerups == false ? 'active' : ''">
 					Chat & Voice
 				</button>
 			</div>
-			<div
-				class="tab-content invisible-scrollbar"
-				id="powerups"
+			<div class="tab-content invisible-scrollbar" id="powerups"
 				:style="props.showPowerups ? 'display: block' : 'display: none'">
 				<div class="game-powerup-container">
 					<div class="powerup">
@@ -80,26 +71,14 @@
 					</div>
 				</div>
 			</div>
-			<div
-				class="tab-content invisible-scrollbar"
-				id="chat"
-				:style="
-					props.showPowerups == false ? 'display: block' : 'display: none'
+			<div class="tab-content invisible-scrollbar" id="chat" :style="props.showPowerups == false ? 'display: block' : 'display: none'
 				">
 				<div class="flex flex-col gap-1">
 					<GameChat />
-					<Button
-						@click="emit('joinVoice')"
-						text="Join Voice"
-						icon="fa-solid fa-microphone"
-						variant="invert"
+					<Button @click="emit('joinVoice')" text="Join Voice" icon="fa-solid fa-microphone" variant="invert"
 						size="fit" />
-					<Button
-						@click="emit('leaveVoice')"
-						text="Leave Voice"
-						icon="fa-solid fa-microphone-slash"
-						variant="invert"
-						size="fit" />
+					<Button @click="emit('leaveVoice')" text="Leave Voice" icon="fa-solid fa-microphone-slash"
+						variant="invert" size="fit" />
 				</div>
 			</div>
 		</div>
@@ -113,6 +92,7 @@ import GameTimer from './GameTimer.vue';
 import GameChat from './GameChat.vue';
 
 import ws from '@/gateway/websocket';
+import { openTab } from '@/helpers/utility.js';
 
 const emit = defineEmits(['joinVoice', 'leaveVoice']);
 
@@ -145,24 +125,6 @@ function usePowerup(powerup: string) {
 	ws.emit('USE_POWERUP', {
 		powerup: powerup
 	});
-}
-
-function openTab(e: Event, tabName: string) {
-	let tabContent, tabLinks;
-	tabContent = document.getElementsByClassName('tab-content');
-	for (let i = 0; i < tabContent.length; i++) {
-		let t = tabContent[i] as any;
-		t.style.display = 'none';
-	}
-
-	tabLinks = document.getElementsByClassName('tablinks');
-	for (let i = 0; i < tabLinks.length; i++) {
-		tabLinks[i].className = tabLinks[i].className.replace(' active', '');
-	}
-
-	document.getElementById(tabName)!.style.display = 'block';
-	let evt = e.currentTarget as any;
-	evt.className += ' active';
 }
 
 ws.on('UPDATE_SCORE', (score) => (state.score = score));
@@ -257,40 +219,5 @@ onBeforeUnmount(() => {
 	border: 2px solid #fefb75;
 	color: #fff;
 	cursor: pointer;
-}
-
-.tab-container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.tab-container button {
-	height: 2.5rem;
-	border: none;
-	cursor: pointer;
-	transition: 0.3s;
-	font-size: 17px;
-	margin: 4px;
-	border-radius: 1rem;
-	padding: 6px 18px;
-	font-weight: semibold;
-	background-color: #5f4bc1;
-}
-
-.tab-container button.active {
-	background-color: #fff;
-	color: #15141a;
-}
-
-.tab-content {
-	display: none;
-	padding: 6px 12px;
-	border-top: none;
-	background-color: transparent;
-	color: #ddd;
-	height: 100%;
-	overflow: hidden;
-	overflow-y: scroll;
 }
 </style>

@@ -124,3 +124,27 @@ export function stopStreams(stream: MediaStream) {
 		if (track.readyState === 'live') track.stop();
 	});
 }
+
+/**
+ * Switch between different containers
+ * @param e Element instance
+ * @param tabName The name of the container to switch too
+ */
+export function openTab(e: Event, tabName: string) {
+	let tabContent: HTMLCollectionOf<Element>,
+		tabLinks: HTMLCollectionOf<Element>;
+	tabContent = document.getElementsByClassName('tab-content');
+	for (let i = 0; i < tabContent.length; i++) {
+		let t = tabContent[i] as any;
+		t.style.display = 'none';
+	}
+
+	tabLinks = document.getElementsByClassName('tablinks');
+	for (let i = 0; i < tabLinks.length; i++) {
+		tabLinks[i].className = tabLinks[i].className.replace(' active', '');
+	}
+
+	document.getElementById(tabName)!.style.display = 'block';
+	let evt = e.currentTarget as any;
+	evt.className += ' active';
+}
